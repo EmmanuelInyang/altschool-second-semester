@@ -23,28 +23,28 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
     <br>
     <li>Inter-node connection:</li>
     Enabling SSH key-based authentication:
-    <ol>
-        <p>The master node (altschool user) should seamlessly SSH into the slave node without requiring a password.</p>
-    </ol>
+        <ol>
+            <p>The master node (altschool user) should seamlessly SSH into the slave node without requiring a password.</p>
+        </ol>
     <br>
     <li>Data-Management and Transfer:</li>
     On Initiation:
-    <ol>
-        <p>Copy the contents of "/mnt/altschool" directory from the Master node to "/mnt/altschool/slave" on the slave node. This operation         should be performed using the altschool user from the master node.</p>
-    </ol>
+        <ol>
+            <p>Copy the contents of "/mnt/altschool" directory from the Master node to "/mnt/altschool/slave" on the slave node. This                      operation should be performed using the altschool user from the master node.</p>
+        </ol>
     <br>
     <li>Process monitoring:</li>
-    <ol>
-        <p>The master node should display an overview of the Linux process management, showcasing currently running processes.</p>
-    </ol>
+        <ol>
+            <p>The master node should display an overview of the Linux process management, showcasing currently running processes.</p>
+        </ol>
     <br>
     <li>Lamp Stack deployment</li>
-    <ol>
-        <li>Install a LAMP (Linux, Apache, MySQL, PHP) stack on both nodes.</li>
-        <li>Ensure Apache is running and set to start on boot.</li>
-        <li>Secure the MySQL installation and initialize it with a default user and password</li>
-        <li>Validate PHP functionality with Apache.</li>
-    </ol>
+        <ol>
+            <li>Install a LAMP (Linux, Apache, MySQL, PHP) stack on both nodes.</li>
+            <li>Ensure Apache is running and set to start on boot.</li>
+            <li>Secure the MySQL installation and initialize it with a default user and password</li>
+            <li>Validate PHP functionality with Apache.</li>
+        </ol>
 </ul>
 
 <h3>Deliverables</h3>
