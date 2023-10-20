@@ -21,8 +21,8 @@
 
 <h2>Step 3: Setting up the Virtual Machines/Infrastructure Configuration</h2>
 <p>The comment "--SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION--" indicates the section that sets up the virtual machines</p>
-<p>The commands are
-  <br>
-  <code>vagrant up</code> - Create and provision the Master and Slave nodes
-</p>
+<p>The commands are</p> 
+<br>
+<code>vagrant up</code> - Create and provision the Master and Slave nodes
+
 
