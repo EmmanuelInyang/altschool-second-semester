@@ -11,10 +11,9 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
 <ul>
     <li>Deploy two Ubuntu systems:</li>
     <ol>
-    <li>Master node: This node should be capable of acting as a control system.</li>
-    <li>Slave node: This node will be managed by the master node.</li>
+        <li>Master node: This node should be capable of acting as a control system.</li>
+        <li>Slave node: This node will be managed by the master node.</li>
     </ol>
-    <br>
     <li>User management:</li>
     On the Master node:
     <ol>
@@ -44,7 +43,7 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
 
 <h3>Deliverables</h3>
 
-<p>A bash script encapsulating the entire deployment process adhering to the specifiactions mentioned above.<br>
+<p>A bash script encapsulating the entire deployment process adhering to the specifications mentioned above.<br>
 Documentation accompanying the script elucidating the steps and procedures for execution.</p>
 
 
