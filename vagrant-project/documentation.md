@@ -22,6 +22,6 @@
 <h2>Step 3: Setting up the Virtual Machines/Infrastructure Configuration</h2>
 <p>The comment "--SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION--" indicates the section that sets up the virtual machines</p>
 <p>The commands are
-  >vagrant up
+  <code>vagrant up</code>
 </p>
 
