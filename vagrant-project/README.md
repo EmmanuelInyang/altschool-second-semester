@@ -18,18 +18,21 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
     On the Master node:
     <ol>
         <li>Create a user named altschool</li>
-        <li>Grant altschool user root (Superuser) privileges</li>
+        <li>Grant AltSchool user root (superuser) privileges</li>
     </ol>
     <br>
     <li>Inter-node connection:</li>
     Enabling SSH key-based authentication:
-    <p>The master node (AltSchool user) should seamlessly SSH into the slave node without requiring a password</p><br>
+    <ol>
+        <p>The master node (AltSchool user) should seamlessly SSH into the slave node without requiring a password</p>
+    <ol>
+    <br>
     <li>Data-Management and Transfer:</li>
     On Initiation:
-    <p>Copy the contents of "/mnt/altschool" directory from the Master node to "/mnt/altschool/slave" on the slave node. This operation         should be performed using the AltSchool user from the master node.</p>
+        <p>Copy the contents of "/mnt/altschool" directory from the Master node to "/mnt/altschool/slave" on the slave node. This operation         should be performed using the AltSchool user from the master node.</p>
     <br>
     <li>Process monitoring:</li>
-    The master node should display an overview of the Linux process management, showcasing currently running processes.
+    <p>The master node should display an overview of the Linux process management, showcasing currently running processes.</p>
     <br>
     <li>Lamp Stack deployment</li>
     <ol>
@@ -42,7 +45,7 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
 
 <h3>Deliverables</h3>
 
-<p>A bash script encapsulating the entire deployment process adhering to the specifiactions mentioned above.<br>
+<p>A bash script encapsulating the entire deployment process adhering to the specifications mentioned above.<br>
 Documentation accompanying the script elucidating the steps and procedures for execution.</p>
 
 
