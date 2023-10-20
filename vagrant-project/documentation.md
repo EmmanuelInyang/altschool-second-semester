@@ -1,5 +1,6 @@
 <h1>vagrant-ubuntu.sh</h1>
   <p><strong>NOTE:</strong> In all the steps, I'm referring to the vagrant-ubuntu.sh script.</p>
+  <br>
 <h2>Step 1: Declaration of Variables</h2>
 <p>In the vagrant-ubuntu.sh script, the section with the comment "--VARIABLES--" declares the various variables needed to carry out the project, making the project reusable.</p>
 <p>The variables declared are:
@@ -19,5 +20,10 @@
 <p>The section with the comment "--VAGRANT FILE CONFIGURATION--" sets up the vagrant file configuration for the master and slave virtual machine.</p>
 
 <h2>Step 3: Setting up the Virtual Machines/Infrastructure Configuration</h2>
-<p>In the vagrant-ubuntu.sh script, the section with the comment "--SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION--" </p>
+<p>The comment "--SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION--" indicates the section that sets up the virtual machines</p>
+<p>The commands are
+<ol>
+  >vagrant up
+</ol>
+</p>
 
