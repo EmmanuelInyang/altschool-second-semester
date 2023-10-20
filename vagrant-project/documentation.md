@@ -16,7 +16,7 @@
 </p>
 
 <h2>Step 2: Vagrant File Configuration</h2>
-<p>In the vagrant-ubuntu.sh script, the section with the comment "--VAGRANT FILE CONFIGURATION--" sets up the vagrant file configuration for the master and slave virtual machine.</p>
+<p>The section with the comment "--VAGRANT FILE CONFIGURATION--" sets up the vagrant file configuration for the master and slave virtual machine.</p>
 
 <h2>Step 3: Setting up the Virtual Machines/Infrastructure Configuration</h2>
 <p>In the vagrant-ubuntu.sh script, the section with the comment "--SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION--" </p>
