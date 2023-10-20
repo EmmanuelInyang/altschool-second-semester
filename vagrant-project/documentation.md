@@ -20,8 +20,9 @@
 <p>The section with the comment "--VAGRANT FILE CONFIGURATION--" sets up the vagrant file configuration for the master and slave virtual machine.</p>
 
 <h2>Step 3: Setting up the Virtual Machines/Infrastructure Configuration</h2>
-<p>The comment "--SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION--" indicates the section that sets up the virtual machines</p>
-<p>The commands are</p> 
+<p>The comment "--SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION--" indicates the section that sets up the virtual machines
+  <br>
+The commands are</p> 
 <br>
 <code>vagrant up</code> - Create and provision the Master and Slave nodes
 
