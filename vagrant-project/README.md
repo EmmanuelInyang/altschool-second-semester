@@ -9,11 +9,16 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
 <h4>Infrastructure Configuration:</h4>
 
 <ul>
-    <li>Deploy two Ubuntu systems:</li><br>
+    <li>Deploy two Ubuntu systems:</li>
     <ol>
     <li>Master node: This node should be capable of acting as a control system.</li>
     <li>Slave node: This node will be managed by the master node.</li>
     </ol>
-    <br>
+    <li>User management:</li>
+    On the Master node:
+    <ol>
+        <li>Create a user named altschool</li>
+        <li>Grant altschool user root(Superuser) privileges</li>
+    </ol>
 </ul>
 
