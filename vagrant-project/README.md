@@ -23,9 +23,7 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
     <br>
     <li>Inter-node connection:</li>
     Enabling SSH key-based authentication:
-    <ol>
         <p>The master node (AltSchool user) should seamlessly SSH into the slave node without requiring a password</p>
-    <ol>
     <br>
     <li>Data-Management and Transfer:</li>
     On Initiation:
