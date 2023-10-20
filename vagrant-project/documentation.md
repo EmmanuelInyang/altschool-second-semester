@@ -23,7 +23,9 @@
 <p>The comment "--SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION--" indicates the section that sets up the virtual machines
   <br>
 The commands are</p> 
-<code>vagrant up</code> Create and provision the Master and Slave nodes.
-<code>sudo useradd -m -d "/home/$master_user" -s /bin/bash "$master_user"</code> Creates a user with a specified directory and bash shell.
-
+<code>vagrant up</code> creates and provision the Master and Slave nodes.
+<br>
+<code>sudo useradd -m -d "/home/$master_user" -s /bin/bash "$master_user"</code> creates a user with a specified directory and bash shell.
+<br>
+<code></code>
 
