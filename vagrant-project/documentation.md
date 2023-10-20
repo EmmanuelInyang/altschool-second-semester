@@ -4,7 +4,7 @@
 <h2>Step 1: Declaration of Variables</h2>
 <p>In the vagrant-ubuntu.sh script, the section with the comment "--VARIABLES--" declares the various variables needed to carry out the project, making the project reusable.</p>
 <p>The variables declared are:
-<ol>
+<ul>
   <li>box_name - Linux-based OS</li>
   <li>master_vm - The name of the master virtual machine.</li>
   <li>slave_vm - The name of the slave virtual machine.</li>
@@ -13,7 +13,7 @@
   <li>vb_memory - The memory needed for the virtual machine.</li>
   <li>slave_target_dir - The slave target directory for file transfer on initiation</li>
   <li>master_target_dir - The master target directory for file transfer on initiation</li>
-</ol>
+</ul>
 </p>
 
 <h2>Step 2: Vagrant File Configuration</h2>
@@ -22,6 +22,7 @@
 <h2>Step 3: Setting up the Virtual Machines/Infrastructure Configuration</h2>
 <p>The comment "--SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION--" indicates the section that sets up the virtual machines</p>
 <p>The commands are
-  <code>vagrant up</code>
+  <br>
+  <code>vagrant up</code> - Create and provision the Master and Slave nodes
 </p>
 
