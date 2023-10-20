@@ -24,10 +24,13 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
     <br>
     <li>Inter-node connection:</li>
     Enabling SSH key-based authentication:
-    <p>The master node (altschool user) should seamlessly SSH into the slave node without requiring a password</p>
+    <p>The master node (AltSchool user) should seamlessly SSH into the slave node without requiring a password</p>
     <br>
     <li>Data-Management and Transfer:</li>
     On Initiation:
-    <p>Copy the contents of /mnt/altschool directory from the Master node to /mnt/altschool/slave on the slave node. This operation should be performed using the altschool user from the master node.</p>
+    <p>Copy the contents of "/mnt/altschool" directory from the Master node to "/mnt/altschool/slave" on the slave node. This operation         should be performed using the AltSchool user from the master node.</p>
+    <br>
+    <li>Process monitoring:</li>
+    The master node should display an overview of the Linux process management
 </ul>
 
