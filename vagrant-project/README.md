@@ -8,8 +8,12 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
 
 <h4>Infrastructure Configuration:</h4>
 
-Deploy two Ubuntu systems:<br>
-    Master node: This node should be capable of acting as a control system.<br>
-    Slave node: This node will be managed by the master node.<br>
-  
+<ul>
+    <li>Deploy two Ubuntu systems:</li><br>
+    <ol>
+    <li>Master node: This node should be capable of acting as a control system.</li>
+    <li>Slave node: This node will be managed by the master node.</li>
+    </ol>
+    <br>
+</ul>
 
