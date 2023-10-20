@@ -13,7 +13,7 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
     <ol>
         <li>Master node: This node should be capable of acting as a control system.</li>
         <li>Slave node: This node will be managed by the master node.</li>
-    </ol>
+    </ol> <br>
     <li>User management:</li>
     On the Master node:
     <ol>
