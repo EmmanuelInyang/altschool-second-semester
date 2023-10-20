@@ -1,4 +1,4 @@
-Step 1: Declaration of Variables
+<h2>Step 1: Declaration of Variables</h2>
 <p>In the Vagrant-ubuntu.sh script, line 4 - line 11 declares the various variables needed to carry out the project, making the project reusable.</p>
 <p>The variables declared are:
 <ol>
