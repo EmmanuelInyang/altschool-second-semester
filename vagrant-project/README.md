@@ -18,7 +18,10 @@ Develop a bash script to orchestrate the automated deployment of two vagrant-bas
     On the Master node:
     <ol>
         <li>Create a user named altschool</li>
-        <li>Grant altschool user root(Superuser) privileges</li>
+        <li>Grant altschool user root (Superuser) privileges</li>
     </ol>
+    <li>Inter-node connection:</li>
+    Enabling SSH key-based authentication:
+    <p>The master node (altschool user) should seamlessly SSH into the slave node without requiring a password</p>
 </ul>
 
