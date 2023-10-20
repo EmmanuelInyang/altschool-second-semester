@@ -1,3 +1,4 @@
+<p><strong>NOTE:</strong> In all the steps, I'm referring to the vagrant-ubuntu.sh script.</p>
 <h2>Step 1: Declaration of Variables</h2>
 <p>In the vagrant-ubuntu.sh script, the section with the comment "--VARIABLES--" declares the various variables needed to carry out the project, making the project reusable.</p>
 <p>The variables declared are:
