@@ -31,7 +31,7 @@ The commands are:</p>
 <br>
 <code>sudo usermod -aG sudo "$master_user"</code> add the master_user to the sudo group.
 <br>
-<code>if [ "$NODE_TYPE" == "$master_user" ]<code> the statement indicates the node (VM) accessed.
+<code>if [ "$NODE_TYPE" == "$master_user" ]</code> the statement indicates the node (VM) accessed.
 <br>
 <code>if [ ! -f "/home/$master_user/.ssh/id_rsa.pub" ]</code> the statement creates a private key for the master_user when there's no key.
 <br>
