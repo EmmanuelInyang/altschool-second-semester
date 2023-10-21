@@ -24,13 +24,18 @@
   <br>
 The commands are:</p> 
 <code>vagrant up</code> creates and provision the Master and Slave nodes.
-<br>
+  <br>
 <code>sudo useradd -m -d "/home/$master_user" -s /bin/bash "$master_user"</code> creates a master_user with a specified directory and bash shell.
 <br>
 <code>echo "$master_user:password" | sudo chpasswd</code> sets password for the master_user.
 <br>
 <code>sudo usermod -aG sudo "$master_user"</code> add the master_user to the sudo group.
+<br>
 <code>if [ "$NODE_TYPE" == "$master_user" ]<code> the statement indicates the node (VM) accessed.
+<br>
 <code>if [ ! -f "/home/$master_user/.ssh/id_rsa.pub" ]<code> the statement creates a private key for the master_user when there's no key.
+<br>
 <code>sudo chmod 700 /home/"$master_user"/.ssh<code> sets the permission of the .ssh folder of the master_user.
+<br>
 <code>sudo chmod 644 /home/"$master_user"/.ssh/id_rsa.pub<code> sets the permission of the id_rsa file of the master_user.
+<br>
