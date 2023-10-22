@@ -2,7 +2,7 @@
   <p><strong>NOTE:</strong> In all the steps, I'm referring to the vagrant-ubuntu.sh script.</p>
   <br>
 <h2>Step 1: Declaration of Variables</h2>
-<p>In the vagrant-ubuntu.sh script, the section with the comment "VARIABLES" declares the various variables needed to carry out the project, making the project reusable.</p>
+<p>In the vagrant-ubuntu.sh script, the section with the comment "Variables" declares the various variables needed to carry out the project, making the project reusable.</p>
 <p>The variables declared are:
 <ul>
   <li>box_name - The name of the Linux-based OS.</li>
@@ -17,10 +17,10 @@
 </p>
 
 <h2>Step 2: Vagrant File Configuration</h2>
-<p>The section with the comment "VAGRANT FILE CONFIGURATION" sets up the vagrant file configuration for the master and slave virtual machine.</p>
+<p>The section with the comment "Vagrant File Configuration" sets up the vagrant file configuration for the master and slave virtual machine.</p>
 
 <h2>Step 3: Setting up the Virtual Machines/Infrastructure Configuration</h2>
-<p>The comment "SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION" indicates the section that sets up the virtual machines.
+<p>The comment "Setting up the Virtual Machines/Infrastructure Configuration" indicates the section that sets up the virtual machines.
   <br>
 The commands are:</p> 
 <code>vagrant up</code> creates and provisions the Master and Slave nodes.
@@ -72,10 +72,10 @@ The commands are:</p>
   <br>
 
 <h2>Step 4: Setting up Inter-node Connection</h2>
-<p>The section "SETTING UP INTER-NODE CONNECTION" creates a temporary file, copies the SSH public key from the master node to the temporary file, then copies the contains of the temporary file to the slave node</p>
+<p>The section "Setting up Inter-node Connection" creates a temporary file, copies the SSH public key from the master node to the temporary file, and then copies the contents of the temporary file to the slave node.</p>
 
 <h2>Step 5: Setting up Data Management and Transfer on Intiation</h2>
-<p>The section "SETTING UP DATA MANAGEMENT AND TRANSFER ON INITIATION", gets the IP addresses for the Master and Slave nodes (VM), creates the directories for the file transfer on the master and slave nodes, and then transfers the file.</p>
+<p>The section "Setting up Data Management and Transfer on Initiation", gets the IP addresses for the Master and Slave nodes (VM), creates the directories for the file transfer on the master and slave nodes, and then transfers the file.</p>
 
 <h2>Step 6: Process Montoring</h2>
 <p>The next section, indicated by the comment "Process Monitoring" displays an overview of Linux process management on the Master node.</p>
