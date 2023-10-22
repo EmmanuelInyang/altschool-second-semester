@@ -26,6 +26,7 @@ The commands are:</p>
 <code>vagrant up</code> creates and provisions the Master and Slave nodes.
   <br>
   <br>
+<h3>For Master Node (VM)</h3>  
 <code>sudo useradd -m -d "/home/$master_user" -s /bin/bash "$master_user"</code> creates a master_user with a specified directory and bash shell.
   <br>
   <br>
