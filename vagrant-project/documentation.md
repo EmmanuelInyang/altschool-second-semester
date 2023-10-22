@@ -51,7 +51,6 @@ The commands are:</p>
 <h4>For Slave Node (VM)</h4>  
 <code>sudo useradd -m -d "/home/$slave_user" -s /bin/bash "$slave_user"</code> creates a slave_user with a specified directory and bash shell.
   <br>
-  <br>
 <code>echo "$slave_user:password" | sudo chpasswd</code> sets password for the slave_user.
   <br>
   <br>
@@ -72,19 +71,16 @@ The commands are:</p>
   <br>
 
 <h2>Step 4: Setting up Inter-node Connection</h2>
-<p>The section "SETTING UP INTER-NODE CONNECTION" </p>
-<p> Creates a temporary file, copies the SSH public key from the master node to the temporary file, then copies the contains of the temporary file to the slave node</p>
+<p>The section "SETTING UP INTER-NODE CONNECTION" creates a temporary file, copies the SSH public key from the master node to the temporary file, then copies the contains of the temporary file to the slave node</p>
 
 <h2>Step 5: Setting up Data Management and Transfer on Intiation</h2>
-<p>The section "SETTING UP DATA MANAGEMENT AND TRANSFER ON INITIATION"</p>
-<p>This section gets IP addresses for the 'Master' and 'Slave' nodes (VM), creates the directories for the file transfer on the master and slave nodes, and then transfers the file.</p>
+<p>The section "SETTING UP DATA MANAGEMENT AND TRANSFER ON INITIATION", gets the IP addresses for the Master and Slave nodes (VM), creates the directories for the file transfer on the master and slave nodes, and then transfers the file.</p>
 
 <h2>Step 6: Process Montoring</h2>
-<p>The next section, indicated by the comment "PROCESS MONITORING"</p>
-<p>This section Displays an overview of Linux process management on the 'Master' node</p>
+<p>The next section, indicated by the comment "PROCESS MONITORING" displays an overview of Linux process management on the Master node.</p>
 
 <h2>Step 7: LAMP Stack Deployment</h2>
-<p>This section "LAMP STACK DEPLOYMENT" does a number of things listed below</p>
+<p>This section "LAMP STACK DEPLOYMENT" does a number of things listed below:</p>
 <ul><li>Update the package list and upgrade installed packages on the Master and Slave nodes.</li>
 <li>Install and configure Apache web server on the Master and Slave nodes.</li>
 <li>Install and configure MySQL Server on the Master and Slave nodes.</li>
