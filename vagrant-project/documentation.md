@@ -29,25 +29,25 @@ The commands are:</p>
 <h4>For Master Node (VM)</h4>  
 <code>sudo useradd -m -d "/home/$master_user" -s /bin/bash "$master_user"</code> creates a master_user with a specified directory and bash shell.
   <br>
- 
+  <br>
 <code>echo "$master_user:password" | sudo chpasswd</code> sets password for the master_user.
   <br>
-  
+  <br>
 <code>sudo usermod -aG sudo "$master_user"</code> add the master_user to the sudo group.
   <br>
-  
+  <br>
 <code>if [ "$NODE_TYPE" == "$master_user" ]</code> the statement indicates when the master_vm is accessed.
   <br>
-  
+  <br>
 <code>if [ ! -f "/home/$master_user/.ssh/id_rsa.pub" ]</code> the statement creates a private key for the master_user when there's no key.
   <br>
-  
+  <br>
 <code>sudo chmod 700 /home/"$master_user"/.ssh</code> sets the permission of the .ssh folder of the master_user.
   <br>
-  
+  <br>
 <code>sudo chmod 644 /home/"$master_user"/.ssh/id_rsa.pub</code> sets the permission of the id_rsa file of the master_user.
   <br>
- 
+  <br>
 <h4>For Slave Node (VM)</h4>  
 <code>sudo useradd -m -d "/home/$slave_user" -s /bin/bash "$slave_user"</code> creates a slave_user with a specified directory and bash shell.
   <br>
