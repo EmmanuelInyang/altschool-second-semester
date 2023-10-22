@@ -101,12 +101,13 @@ ENDSSH
 
 #------SETTING UP INTER-NODE CONNECTION--------
 # Copy the SSH public key from the master node to a temporary file
+# Then copy the contains of the temporary file to the slave node
 touch /tmp/master_public_key.pub
 vagrant ssh "$master_vm" -c "sudo cat /home/$master_user/.ssh/id_rsa.pub" > /tmp/master_public_key.pub
 vagrant ssh "$slave_vm" -c "sudo tee -a /home/$slave_user/.ssh/authorized_keys" < /tmp/master_public_key.pub
 
 #------SETTING UP DATA MANAGEMENT AND TRANSFER ON INITIATION---------
-# Get IP addresses for testing php on 'Master' and 'Slave' VMs
+# Get IP addresses for the 'Master' and 'Slave' nodes (VM)
 master_ip=$(vagrant ssh $master_vm -c "hostname -I | awk '{print \$2}'"| tr -d '\r') # Get the master IP address
 slave_ip=$(vagrant ssh "$slave_vm" -c "hostname -I | awk '{print \$2}'"| tr -d '\r') # Get the slave IP address
 
