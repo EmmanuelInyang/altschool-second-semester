@@ -84,4 +84,12 @@ The commands are:</p>
 <p>This section Displays an overview of Linux process management on the 'Master' node</p>
 
 <h2>Step 7: LAMP Stack Deployment</h2>
-<p>This section "LAMP STACK DEPLOYMENT"</p>
+<p>This section "LAMP STACK DEPLOYMENT" does a number of things listed below</p>
+<ul><li>Update the package list and upgrade installed packages on the Master and Slave nodes.</li>
+<li>Install and configure Apache web server on the Master and Slave nodes.</li>
+<li>Install and configure MySQL Server on the Master and Slave nodes.</li>
+<li>Secure MySQL installation with default settings on the Master and Slave nodes.</li>
+<li>Install PHP and required modules on the Master and Slave nodes.</li>
+<li>Create a PHP info file to test the setup on the Master and Slave nodes.</li>
+<li>Validate PHP functionality with Apache on the Master and Slave nodes.</li></ul>
+
