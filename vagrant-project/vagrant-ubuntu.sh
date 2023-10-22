@@ -51,10 +51,10 @@ vagrant ssh "$master_vm" << ENDSSH
   # Add the user to the sudo group to grant root privileges
   sudo usermod -aG sudo "$master_user"
 
-  if [ "$NODE_TYPE" == "$master_user" ]; then
+  if [ "$NODE_TYPE" == "$master_vm" ]; then
     echo "You are on the $master_vm node."
   else
-    echo "export NODE_TYPE=$master_user" >> ~/.bashrc
+    echo "export NODE_TYPE=$master_vm" >> ~/.bashrc
     source ~/.bashrc
     echo "You are on the $master_vm node."
   fi
@@ -79,10 +79,10 @@ vagrant ssh "$slave_vm" << ENDSSH
   # Add the user to the sudo group to grant root privileges
   sudo usermod -aG sudo "$slave_user"
 
-  if [ "$NODE_TYPE" == "$slave_user" ]; then
+  if [ "$NODE_TYPE" == "$slave_vm" ]; then
     echo "You are on the $slave_vm node."
   else
-    echo "export NODE_TYPE=$slave_user" >> ~/.bashrc
+    echo "export NODE_TYPE=$slave_vm" >> ~/.bashrc
     source ~/.bashrc
     echo "You are on the $slave_vm node."
   fi
@@ -106,7 +106,9 @@ vagrant ssh "$master_vm" -c "sudo cat /home/$master_user/.ssh/id_rsa.pub" > /tmp
 vagrant ssh "$slave_vm" -c "sudo tee -a /home/$slave_user/.ssh/authorized_keys" < /tmp/master_public_key.pub
 
 #------SETTING UP DATA MANAGEMENT AND TRANSFER ON INITIATION---------
-slave_ip=$(vagrant ssh "$slave_vm" -c "hostname -I | awk '{print \$2}'"| tr -d '\r') # Getting the slave ip address
+# Get IP addresses for testing php on 'Master' and 'Slave' VMs
+master_ip=$(vagrant ssh $master_vm -c "hostname -I | awk '{print \$2}'"| tr -d '\r') # Get the master IP address
+slave_ip=$(vagrant ssh "$slave_vm" -c "hostname -I | awk '{print \$2}'"| tr -d '\r') # Get the slave IP address
 
 vagrant ssh "$slave_vm" << ENDSSH
     sudo mkdir -p /home/$slave_user/mnt/$master_user/$slave_user
@@ -136,56 +138,38 @@ vagrant ssh "$master_vm" << 'ENDSSH'
   sudo apt update
   sudo apt upgrade -y
 
-  # Install Apache web server
-  sudo apt install apache2 -y
+  # Install and configure Apache web server
+  sudo apt install apache2 -y               # Install Apache web server
+  sudo systemctl enable apache2             # Enable Apache to start on boot
+  sudo systemctl start apache2              # Start the Apache service
 
-  # Enable Apache to start on boot
-  sudo systemctl enable apache2
-
-  # Start the Apache service
-  sudo systemctl start apache2
-
-  # Install MySQL Server
-  sudo apt install mysql-server -y
-
-  # Secure MySQL installation
+  # Install and configure MySQL Server
+  sudo apt install mysql-server -y          # Install MySQL Server
+  
+  # Secure MySQL installation (use default settings)
   sudo mysql_secure_installation <<EOF
-
-    # Set the MySQL root password
     password
-
-    # Remove anonymous users
+    Y  
+    Y   
     Y
-
-    # Disallow root login remotely
     Y
-
-    # Remove the test database
-    Y
-
-    # Remove the privileges on the test database
-    Y
-
-    # Reload privilege tables
     Y
   EOF
 
   # Install PHP and required modules
-  sudo apt install php libapache2-mod-php php-mysql -y
+  sudo apt install php libapache2-mod-php -y    # Apache PHP module.
+  sudo apt install php-cli -y                   # PHP Command Line Interface (CLI).
+  sudo apt install php-cgi -y                   # PHP CGI (for running PHP scripts without Apache)
+  sudo apt install php-mysql -y                 # PHP support for MySQL.
 
   # Create a PHP info file to test the setup
   sudo touch /var/www/html/test-php-file.php
   sudo chmod 600 /var/www/html/test-php-file.php
   echo "<?php phpinfo(); ?>" > /var/www/html/test-php-file.php
-
   echo "PHP test file created on the $msater_vm"
 
   # Restart Apache to apply changes
-  sudo systemctl restart apache2
-
-  # Cleanup
-  sudo apt autoremove -y
-  sudo apt clean
+  sudo systemctl restart apache2 
 
   # Display installation completion message
   echo "LAMP stack installation on '$master_vm' completed."
@@ -196,58 +180,44 @@ vagrant ssh "$slave_vm" << ENDSSH
   sudo apt update
   sudo apt upgrade -y
 
-  # Install Apache web server
-  sudo apt install apache2 -y
+  # Install and configure Apache web server
+  sudo apt install apache2 -y               # Install Apache web server
+  sudo systemctl enable apache2             # Enable Apache to start on boot
+  sudo systemctl start apache2              # Start the Apache service
 
-  # Enable Apache to start on boot
-  sudo systemctl enable apache2
-
-  # Start the Apache service
-  sudo systemctl start apache2
-
-  # Install MySQL Server
-  sudo apt install mysql-server -y
-
-  # Secure MySQL installation
+  # Install and configure MySQL Server
+  sudo apt install mysql-server -y          # Install MySQL Server
+  
+  # Secure MySQL installation (use default settings)
   sudo mysql_secure_installation <<EOF
-
-    # Set the MySQL root password
-    YourRootPasswordHere
-
-    # Remove anonymous users
+    password
+    Y  
+    Y   
     Y
-
-    # Disallow root login remotely
     Y
-
-    # Remove the test database
-    Y
-
-    # Remove the privileges on the test database
-    Y
-
-    # Reload privilege tables
     Y
   EOF
 
   # Install PHP and required modules
-  sudo apt install php libapache2-mod-php php-mysql -y
+  sudo apt install php libapache2-mod-php -y    # Apache PHP module.
+  sudo apt install php-cli -y                   # PHP Command Line Interface (CLI).
+  sudo apt install php-cgi -y                   # PHP CGI (for running PHP scripts without Apache)
+  sudo apt install php-mysql -y                 # PHP support for MySQL.
+
+  # Create a PHP info file to test the setup
+  sudo touch /var/www/html/test-php-file.php
+  sudo chmod 600 /var/www/html/test-php-file.php
+  echo "<?php phpinfo(); ?>" > /var/www/html/test-php-file.php
+  echo "PHP test file created on the $slave_vm"
 
   # Restart Apache to apply changes
-  sudo systemctl restart apache2
-
-  # Cleanup
-  sudo apt autoremove -y
-  sudo apt clean
+  sudo systemctl restart apache2 
 
   # Display installation completion message
   echo "LAMP stack installation on '$slave_vm' completed."
 ENDSSH
 
-# Get IP addresses for testing php on 'Master' and 'Slave' VMs
-master_ip=$(vagrant ssh $master_vm -c "hostname -I | awk '{print \$2}'"| tr -d '\r')
-# The slave IP was gotten in line 109 and stored as $slave_ip.
-
+# Validate PHP functionality with Apache
 echo "Deployment completed!"
 echo "Visit: http://$master_ip/test-php-file.php to validate the '$master_vm' PHP setup"
-echo "Visit: http://$slave_ip/info.php to validate the '$slave_vm' PHP setup"
+echo "Visit: http://$slave_ip/test-php-file.php to validate the '$slave_vm' PHP setup"
