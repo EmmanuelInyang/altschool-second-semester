@@ -26,7 +26,7 @@ The commands are:</p>
 <code>vagrant up</code> creates and provisions the Master and Slave nodes.
   <br>
   <br>
-<h4>For Master Node (VM)</h4>  
+<h5>For Master Node (VM)</h5>  
 <code>sudo useradd -m -d "/home/$master_user" -s /bin/bash "$master_user"</code> creates a master_user with a specified directory and bash shell.
   <br>
   <br>
@@ -48,7 +48,7 @@ The commands are:</p>
 <code>sudo chmod 644 /home/"$master_user"/.ssh/id_rsa.pub</code> sets the permission of the id_rsa file of the master_user.
   <br>
   <br>
-<h4>For Slave Node (VM)</h4>  
+<h5>For Slave Node (VM)</h5>  
 <code>sudo useradd -m -d "/home/$slave_user" -s /bin/bash "$slave_user"</code> creates a slave_user with a specified directory and bash shell.
   <br>
   <br>
