@@ -78,7 +78,7 @@ The commands are:</p>
 <p>The section "Setting up Data Management and Transfer on Initiation", gets the IP addresses for the Master and Slave nodes (VM), creates the directories for the file transfer on the master and slave nodes, and then transfers the file.</p>
 
 <h2>Step 6: Process Montoring</h2>
-<p>The next section, indicated by the comment "Process Monitoring" displays an overview of Linux process management on the Master node.</p>
+<p>The next section, indicated by the comment "Process Monitoring", displays an overview of Linux process management on the Master node.</p>
 
 <h2>Step 7: LAMP Stack Deployment</h2>
 <p>This section "LAMP Stack Deployment" does a number of things listed below:</p>
