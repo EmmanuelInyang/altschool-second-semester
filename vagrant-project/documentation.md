@@ -70,3 +70,5 @@ The commands are:</p>
 <code>sudo chmod 644 /home/"$slave_user"/.ssh/id_rsa.pub</code> sets the permission of the id_rsa file of the slave_user.
   <br>
   <br>
+
+<h2>Step 4: Setting up Inter-node Connection</h2>
