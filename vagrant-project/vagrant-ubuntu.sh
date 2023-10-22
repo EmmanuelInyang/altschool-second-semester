@@ -145,38 +145,38 @@ vagrant ssh "$master_vm" << 'ENDSSH'
 
   # Install and configure MySQL Server
   sudo apt install mysql-server -y          # Install MySQL Server
-  
+
   # Secure MySQL installation (use default settings)
   sudo mysql_secure_installation <<EOF
     password
-    Y  
-    Y   
+    Y
+    Y
     Y
     Y
     Y
   EOF
+ENDSSH
 
-  # Install PHP and required modules
+# Install PHP and required modules on the "master_vm"
+vagrant ssh "$master_vm" << ENDSSH
   sudo apt install php libapache2-mod-php -y    # Apache PHP module.
   sudo apt install php-cli -y                   # PHP Command Line Interface (CLI).
   sudo apt install php-cgi -y                   # PHP CGI (for running PHP scripts without Apache)
   sudo apt install php-mysql -y                 # PHP support for MySQL.
+  sudo systemctl restart apache2                # Restart Apache to apply changes
+  echo "LAMP stack installation on '$master_vm' completed."  # Display installation completion message
+ENDSSH
 
-  # Create a PHP info file to test the setup
-  sudo touch /var/www/html/test-php-file.php
-  sudo chmod 600 /var/www/html/test-php-file.php
-  echo "<?php phpinfo(); ?>" > /var/www/html/test-php-file.php
-  echo "PHP test file created on the $msater_vm"
-
-  # Restart Apache to apply changes
-  sudo systemctl restart apache2 
-
-  # Display installation completion message
-  echo "LAMP stack installation on '$master_vm' completed."
+# Create a PHP info file to test the setup on the "master_vm"
+vagrant ssh "$master_vm" << ENDSSH
+  sudo mkdir -p /var/www/html
+  echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/test-php-file.php
+  echo "PHP test file created on the $master_vm"
+  sudo systemctl restart apache2                # Restart Apache to apply changes
 ENDSSH
 
 vagrant ssh "$slave_vm" << ENDSSH
-  # Update the package list and upgrade installed packages
+# Update the package list and upgrade installed packages
   sudo apt update
   sudo apt upgrade -y
 
@@ -187,37 +187,38 @@ vagrant ssh "$slave_vm" << ENDSSH
 
   # Install and configure MySQL Server
   sudo apt install mysql-server -y          # Install MySQL Server
-  
+
   # Secure MySQL installation (use default settings)
   sudo mysql_secure_installation <<EOF
     password
-    Y  
-    Y   
+    Y
+    Y
     Y
     Y
     Y
   EOF
+ENDSSH
 
-  # Install PHP and required modules
+# Install PHP and required modules on the "slave_vm"
+vagrant ssh "$slave_vm" << ENDSSH
   sudo apt install php libapache2-mod-php -y    # Apache PHP module.
   sudo apt install php-cli -y                   # PHP Command Line Interface (CLI).
   sudo apt install php-cgi -y                   # PHP CGI (for running PHP scripts without Apache)
   sudo apt install php-mysql -y                 # PHP support for MySQL.
-
-  # Create a PHP info file to test the setup
-  sudo touch /var/www/html/test-php-file.php
-  sudo chmod 600 /var/www/html/test-php-file.php
-  echo "<?php phpinfo(); ?>" > /var/www/html/test-php-file.php
-  echo "PHP test file created on the $slave_vm"
-
-  # Restart Apache to apply changes
-  sudo systemctl restart apache2 
-
-  # Display installation completion message
-  echo "LAMP stack installation on '$slave_vm' completed."
+  sudo systemctl restart apache2                # Restart Apache to apply changes
+  echo "LAMP stack installation on '$slave_vm' completed."  # Display installation completion message
 ENDSSH
 
-# Validate PHP functionality with Apache
+# Create a PHP info file to test the setup on the "slave-vm"
+vagrant ssh "$slave_vm" << ENDSSH
+  sudo mkdir -p /var/www/html
+  echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/test-php-file.php
+  echo "PHP test file created on the $slave_vm"
+  sudo systemctl restart apache2                # Restart Apache to apply changes
+ENDSSH
+
+# Validate PHP functionality with Apache on the "master_vm" and "slave_vm"
 echo "Deployment completed!"
 echo "Visit: http://$master_ip/test-php-file.php to validate the '$master_vm' PHP setup"
 echo "Visit: http://$slave_ip/test-php-file.php to validate the '$slave_vm' PHP setup"
+
