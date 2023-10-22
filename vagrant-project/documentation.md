@@ -51,6 +51,7 @@ The commands are:</p>
 <h4>For Slave Node (VM)</h4>  
 <code>sudo useradd -m -d "/home/$slave_user" -s /bin/bash "$slave_user"</code> creates a slave_user with a specified directory and bash shell.
   <br>
+  <br>
 <code>echo "$slave_user:password" | sudo chpasswd</code> sets password for the slave_user.
   <br>
   <br>
@@ -80,7 +81,7 @@ The commands are:</p>
 <p>The next section, indicated by the comment "PROCESS MONITORING" displays an overview of Linux process management on the Master node.</p>
 
 <h2>Step 7: LAMP Stack Deployment</h2>
-<p>This section "LAMP STACK DEPLOYMENT" does a number of things listed below:</p>
+<p>This section "LAMP Stack Deployment" does a number of things listed below:</p>
 <ul><li>Update the package list and upgrade installed packages on the Master and Slave nodes.</li>
 <li>Install and configure Apache web server on the Master and Slave nodes.</li>
 <li>Install and configure MySQL Server on the Master and Slave nodes.</li>
