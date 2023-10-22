@@ -72,10 +72,13 @@ The commands are:</p>
   <br>
 
 <h2>Step 4: Setting up Inter-node Connection</h2>
-<p>This section "#------SETTING UP INTER-NODE CONNECTION--------" </p>
+<p>The section "------SETTING UP INTER-NODE CONNECTION--------" </p>
 <p> Creates a temporary file, copies the SSH public key from the master node to the temporary file, then copies the contains of the temporary file to the slave node</p>
 
-<h2>Step 4: Setting up Inter-node Connection</h2>
-<p>------SETTING UP DATA MANAGEMENT AND TRANSFER ON INITIATION---------</p>
+<h2>Step 5: Setting up Data Management and Transfer on Intiation</h2>
+<p>The section "------SETTING UP DATA MANAGEMENT AND TRANSFER ON INITIATION---------"</p>
 <p>This section gets IP addresses for the 'Master' and 'Slave' nodes (VM), creates the directories for the file transfer on the master and slave nodes, and then transfers the file.</p>
 
+<h2>Step 6: Process Montoring</h2>
+<p>The next section, indicated by the comment "------------PROCESS MONITORING-------------"</p>
+<p>This section Displays an overview of Linux process management on the 'Master' node</p>
