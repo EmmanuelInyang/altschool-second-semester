@@ -48,3 +48,25 @@ The commands are:</p>
 <code>sudo chmod 644 /home/"$master_user"/.ssh/id_rsa.pub</code> sets the permission of the id_rsa file of the master_user.
   <br>
   <br>
+<h4>For Slave Node (VM)</h4>  
+<code>sudo useradd -m -d "/home/$slave_user" -s /bin/bash "$slave_user"</code> creates a slave_user with a specified directory and bash shell.
+  <br>
+  <br>
+<code>echo "$slave_user:password" | sudo chpasswd</code> sets password for the slave_user.
+  <br>
+  <br>
+<code>sudo usermod -aG sudo "$slave_user"</code> add the slave_user to the sudo group.
+  <br>
+  <br>
+<code>if [ "$NODE_TYPE" == "$slave_user" ]</code> the statement indicates when the slave_vm is accessed.
+  <br>
+  <br>
+<code>if [ ! -f "/home/$slave_user/.ssh/id_rsa.pub" ]</code> the statement creates a private key for the slave_user when there's no key.
+  <br>
+  <br>
+<code>sudo chmod 700 /home/"$slave_user"/.ssh</code> sets the permission of the .ssh folder of the slave_user.
+  <br>
+  <br>
+<code>sudo chmod 644 /home/"$slave_user"/.ssh/id_rsa.pub</code> sets the permission of the id_rsa file of the slave_user.
+  <br>
+  <br>
