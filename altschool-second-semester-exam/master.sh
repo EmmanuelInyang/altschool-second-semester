@@ -114,9 +114,9 @@ sudo systemctl restart apache2
 
 # Installing Laravel
 # Create the directory that will hold the Laravel application files.
-sudo mkdir {{ laravel_app_directory }} 
+sudo mkdir "$laravel_app_directory" 
 # Change the working directory to the newly created Laravel directory.
-cd {{ laravel_app_directory }}   
+cd "$laravel_app_directory   
 # Set ownership and permissions for the Laravel application directory.
 # This ensures the web server (e.g., Apache) can read and write to the Laravel files.            
 sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}   
