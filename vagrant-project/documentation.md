@@ -41,7 +41,8 @@ Before running this script, ensure you have the following prerequisites:
    ```bash
    sh vagrant-ubuntu.sh
 
-4. **Test LAMP Setup** After running the script, you can access the PHP test file on both the Master and Slave nodes. Use the IP addresses displayed during the script execution to access the PHP test file.
+4. **Test LAMP Setup:**
+After running the script, you can access the PHP test file on both the Master and Slave nodes. Use the IP addresses displayed during the script execution to access the PHP test file.
 
    - Master node PHP test: http://$master_ip/test-php-file.php
    - Slave node PHP test: http://$slave_ip/test-php-file.php
