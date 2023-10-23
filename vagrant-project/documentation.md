@@ -3,17 +3,15 @@
 
 <p>This script automates the setup and deployment of a LAMP (Linux, Apache, MySQL, PHP) stack on two Vagrant virtual machines, referred to as the "Master" and "Slave" nodes. To accomplish this, it performs the following steps.</p>
 
-<ul>
-   <li>Configure the Vagrantfile with the defined VM settings.</li>
-   <li>Create and provision the Master and Slave VMs.</li>
-   <li>Configure user accounts and generate SSH key pairs.</li>
-   <li>Copy SSH keys between nodes for passwordless SSH.</li>
-   <li>Set up directories for data synchronization.</li>
-   <li>Synchronize data from the Master to the Slave using rsync.</li>
-   <li>Install and configure a LAMP stack on both nodes.</li>
-   <li>Create a PHP info file for testing the setup.</li>
-   <li>Display process information on the Master node</li>
-</ul>
+   - Configure the Vagrantfile with the defined VM settings.
+   - Create and provision the Master and Slave VMs.
+   - Configure user accounts and generate SSH key pairs.
+   - Copy SSH keys between nodes for passwordless SSH.
+   - Set up directories for data synchronization.
+   - Synchronize data from the Master to the Slave using rsync.
+   - Install and configure a LAMP stack on both nodes.
+   - Create a PHP info file for testing the setup.
+   - Display process information on the Master node</li>
 
 ## Prerequisites
 
