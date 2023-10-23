@@ -11,7 +11,7 @@
    - Synchronize data from the Master to the Slave using rsync.
    - Install and configure a LAMP stack on both nodes.
    - Create a PHP info file for testing the setup.
-   - Display process information on the Master node</li>
+   - Display process information on the Master node.
 
 ## Prerequisites
 
