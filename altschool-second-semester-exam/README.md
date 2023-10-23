@@ -8,15 +8,14 @@
   <li>Execute the bash script on the Slave node and verify that the PHP application is accessible through the VM's IP address (take a screenshot of this as evidence)</li>
   <li>Create a cron job to check the server's uptime every 12 a.m.</li>
 </ol>
-<ul>
+</ul>
   <br>
-<h2>Requirements</h2>
+<h3>Requirements</h3>
 <ol><li>Submit the bash script and Ansible playbook to (publicly accessible) GitHub repository.</li>
 <li>Document the steps with screenshots in md files, including proof of the application's accessibility (screenshots taken where necessary)</li>
 <li>Use either the VM's IP address or a domain name as the URL.</li>
 </ol>
-
-
+  <br>
 <h2>PHP Laravel GitHub Repository:</h2>
 <link>
 https://github.com/laravel/laravel</link>
