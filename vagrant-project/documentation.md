@@ -1,7 +1,19 @@
 <h1>vagrant-ubuntu.sh</h1>
 <h3>Vagrant LAMP Stack Deployment</h3>
 
-<p>This script automates the setup and deployment of a LAMP (Linux, Apache, MySQL, PHP) stack on two Vagrant virtual machines, referred to as the "Master" and "Slave" nodes. It also configures user accounts, SSH key pairs, and data synchronization between the nodes.</p>
+<p>This script automates the setup and deployment of a LAMP (Linux, Apache, MySQL, PHP) stack on two Vagrant virtual machines, referred to as the "Master" and "Slave" nodes. To accomplish this, it performs the following steps.</p>
+
+<ul>
+   <li>Configure the Vagrantfile with the defined VM settings.</li>
+   <li>Create and provision the Master and Slave VMs.</li>
+   <li>Configure user accounts and generate SSH key pairs.</li>
+   <li>Copy SSH keys between nodes for passwordless SSH.</li>
+   <li>Set up directories for data synchronization.</li>
+   <li>Synchronize data from the Master to the Slave using rsync.</li>
+   <li>Install and configure a LAMP stack on both nodes.</li>
+   <li>Create a PHP info file for testing the setup.</li>
+   <li>Display process information on the Master node</li>
+</ul>
 
 ## Prerequisites
 
@@ -31,5 +43,5 @@ Before running this script, ensure you have the following prerequisites:
    ```bash
    sh vagrant-ubuntu.sh
 
-4. 
+4. ****
 
