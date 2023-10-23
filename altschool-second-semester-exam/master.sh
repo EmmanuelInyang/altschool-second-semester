@@ -51,6 +51,52 @@ vagrant ssh "$master_vm" << ENDSSH
   echo "LAMP stack installation on '$master_vm' completed."  # Display installation completion message
 ENDSSH
 
+# Configure PHP
+# Ensure that the package lists on your Ubuntu system are up to date to have access to the latest package information.
+sudo apt update
+# Install necessary prerequisites, including 'curl' for downloading files, 'php-zip' for handling ZIP archives,
+# and 'unzip' for extracting ZIP files. The '-y' flag automatically answers "yes" to
+# any installation prompts, streamlining the process.
+sudo apt install curl php-zip unzip -y
+# Download the Composer installation script from getcomposer.org and execute it. This script downloads Composer and installs
+# it in the /usr/local/bin directory with the name 'composer'. After installation, the setup script is removed.
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+php -r "unlink('composer-setup.php');"
+
+# Configure Apache Virtual Host
+# The following code appends a VirtualHost configuration to the specified Apache site file.
+# It defines the server administrator's email, server name or IP address, document root,
+# directory options, and log file locations for Apache.
+sudo tee -a /etc/apache2/sites-available/{{ apache_virtual_host_name }} <<EOF
+<VirtualHost *:80>
+     ServerAdmin {{ server_admin_email }}
+     ServerName {{ server_name }}
+     DocumentRoot {{ document_root }}
+
+     <Directory {{ document_root }}>
+        Options Indexes Multiviews FollowSymlinks
+        AllowOverride All
+        Require all granted
+     </Directory>
+
+     ErrorLog {{ apache_log_dir }}/error.log
+     CustomLog {{ apache_log_dir }}/access.log combined
+ </VirtualHost>
+EOF
+
+# Enable Apache Rewrite Module and Virtual Host Configuration.
+# Activate the Apache rewrite module to enable URL rewriting, which is often used by web applications.
+sudo a2enmod rewrite              
+# Enable the Apache virtual host configuration for your web application.
+# This makes the web application accessible through the specified server name or IP address.                  
+sudo a2ensite {{ apache_virtual_host_name }}  
+# Disable the default Apache virtual host (usually named '000-default') if it's enabled.
+# This step ensures that your web application's virtual host takes precedence.     
+sudo a2dissite 000-default   
+# Restart Apache to apply changes.                       
+sudo systemctl restart apache2   
+
 # LARAVEL Application Installation
 # This code installs the Laravel application, creates the necessary folders, and sets the permissions.
 vagrant ssh "$master_vm" << ENDSSH
