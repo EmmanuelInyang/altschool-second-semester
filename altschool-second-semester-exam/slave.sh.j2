@@ -169,15 +169,18 @@ execute_query() {
     mysql -u "\$DB_USERNAME" -p"\$DB_PASSWORD" "\$database" -e "\$query"
 }
 
+# Function to create a database.
 create_database() {
     local database="\$1"
     execute_query "CREATE DATABASE IF NOT EXISTS \$database"
 }
 
+# Grant privileges for creating databases.
 execute_query "GRANT CREATE DATABASE ON *.* TO '\$DB_USERNAME'@'localhost';" "mysql"
 
+# Create a database.
 create_database "{{ db_name_placeholder }}"
-
+# Start MySQL service
 sudo systemctl start mysql
 EOF
 
