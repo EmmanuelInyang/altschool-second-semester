@@ -69,18 +69,3 @@ vagrant ssh "$master_vm" << ENDSSH
   # Display a completion message
   echo "Laravel application installed in '$laravel_app_directory'."
 ENDSSH
-
-# Create PHP Info File for Testing on Master Node
-# This code creates a PHP info file for testing the setup on the "master_vm" node.
-# It includes the following tasks:
-# - Creating a directory for the web server.
-# - Creating a PHP file that displays PHP information.
-# - Displaying a message indicating the PHP test file creation.
-# - Restarting Apache to apply changes.
-vagrant ssh "$master_vm" << ENDSSH
-  sudo mkdir -p /var/www/html
-  echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/test-php-file.php
-  echo "PHP test file created on the $master_vm"
-  sudo systemctl restart apache2                # Restart Apache to apply changes
-ENDSSH
-
