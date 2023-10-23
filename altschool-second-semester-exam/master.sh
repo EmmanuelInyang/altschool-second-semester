@@ -62,7 +62,6 @@ vagrant ssh "$master_vm" << ENDSSH
   sudo apt-get update
   sudo apt-get install git composer -y
   sudo -u "$laravel_owner" git clone "$laravel_app_repo" "$laravel_app_directory"
-  sudo chown -R $USER "$laravel_app_directory"
   cd "$laravel_app_directory"
   composer install --no-dev
 
