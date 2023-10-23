@@ -1,0 +1,49 @@
+---
+
+- name: Deploy PHP Application and create Cron jobs on Slave node
+  hosts: slaveserver
+  vars:
+    bash_script_src: /home/vagrant/slave.sh.j2
+    bash_script_dest: /home/vagrant/Ansible/slave.sh
+    cron_job_name: schedule to check uptime server
+    cron_minute: "0"
+    cron_hour: "0"
+    cron_day: "*"
+    cron_month: "*"
+    cron_weekday: "*"
+    cron_command: "/usr/bin/uptime > /var/log/uptime.log 2>&1"
+    php_app_url: "http://{{ ansible_host }}"
+    php_app_verification_string: "Laracast"
+
+  tasks:
+    - name: Create a cron job to check server uptime
+      cron:
+        name: "{{ cron_job_name }}"
+        minute: "{{ cron_minute }}"
+        hour: "{{ cron_hour }}"
+        day: "{{ cron_day }}"
+        month: "{{ cron_month }}"
+        weekday: "{{ cron_weekday }}"
+        job: "{{ cron_command }}"
+        state: present
+
+    - name: Copy the bash script
+      copy:
+        src: "{{ bash_script_src }}"
+        dest: "{{ bash_script_dest }}"
+        mode: '0777'
+
+    - name: Execute the bash script
+      shell: "bash {{ bash_script_dest }}"
+      ignore_errors: yes
+
+    - name: Verify PHP Application Accessibility
+      ansible.builtin.uri:
+        url: "{{ php_app_url }}"
+        return_content: yes
+      register: page_content
+
+    - name: Check if the expected string is in the page contents
+      ansible.builtin.fail:
+        msg: "The page does not contain '{{ php_app_verification_string }}'"
+      when: php_app_verification_string not in page_content.content
