@@ -1,0 +1,158 @@
+#!/bin/bash
+
+# APACHE CONFIGURATION
+# Update Apt Package manager
+echo -e "\n\nUpdating Apt Package\n"
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+# Installing Apache
+sudo apt-get install apache2 -y
+
+# To ensure Apache is running and set to start on boot.
+echo -e "\n\nStarting Apache\n"
+sudo systemctl start apache2
+echo -e "\n\nEnabling Apache to start on boot\n"
+sudo systemctl enable apache2
+
+# To configure firewall rule
+echo -e "\n\nAdding firewall rule to Apache\n"
+sudo ufw allow 80/tcp
+
+# MYSQL CONFIGURATION
+# Update Apt Package Manager
+echo -e "\n\nUpdating Apt Package\n"
+sudo apt-get update -y
+
+# Installing MySQL
+echo -e "\n\nInstalling MySQL\n"
+sudo apt-get install mysql-server -y
+
+# Start and enable MySQL to start and enable to run on system boot
+sudo systemctl start mysql
+sudo systemctl enable mysql
+
+# Secure MySQL Installation
+sudo mysql_secure_installation <<EOF
+n
+n
+n
+n
+y
+EOF
+
+# INSTALLING PHP USING PPA:ONDRE
+# Installing PHP using the ppa:ondrej/php package repo.
+sudo apt-get install software-properties-common
+sudo add-apt-repository -y ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install libapache2-mod-php php php-common php-xml php-mysql php-gd php-mbstring php-tokenizer php-json php-bcmath php-curl php-zip unzip -y
+
+# CONFIGURATION OF PHP
+sudo sed -i 's/cgi.fix_pathinfo=0/' /etc/php/{{ php_version }}/apache2/php.ini
+# After configuring PHP, we need to restart Apache
+sudo systemctl restart apache2
+# Install Composer since it is a PHP dependency manager that manages the dependencies and libraries that PHP applications require
+curl -sS https://getcomposer.org/installer | php
+# Move the downloaded binary to the system directory
+sudo mv composer.phar /usr/local/bin/composer
+
+# CONFIGURATION OF APACHE WEB SERVER
+sudo tee -a /etc/apache2/sites-available/{{ apache_virtual_host_name }} <<EOF
+<VirtualHost *:80>
+
+     ServerAdmin {{ server_admin_email }}
+     ServerName {{ server_name }}
+     DocumentRoot {{ document_root }}
+
+     <Directory {{ document_root }}>
+        Options Indexes Multiviews FollowSymlinks
+        AllowOverride All
+        Require all granted
+     </Directory>
+
+     ErrorLog {{ apache_log_dir }}/error.log
+     CustomLog {{ apache_log_dir }}/access.log combined
+ </VirtualHost>
+EOF
+
+# Activate the Apache rewrite module using the following command
+echo -e "\n\nEnabling Modules\n"
+sudo a2enmod rewrite
+echo -e "\n\nEnabling Laravel virtual host"
+sudo a2ensite {{ apache_virtual_host_name }}
+echo -e "\n\nDisabling Apache default host"
+sudo a2dissite 000-default
+
+# Restart Apache
+sudo systemctl restart apache2
+
+# INSTALLING LARAVEL
+# Create the folder that will hold the application
+sudo mkdir {{ laravel_app_directory }} && cd {{ laravel_app_directory }}
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}
+
+# Clone the Laravel application
+sudo apt-get update
+sudo apt-get install git composer -y
+sudo -u {{ laravel_owner }} git clone {{ laravel_app_repo }} {{ laravel_app_directory }}
+sudo chown -R $USER {{ laravel_app_directory }}
+cd {{ laravel_app_directory }}
+composer install --no-dev
+
+# Give Apache permissions over the Laravel directory
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/storage/*
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/bootstrap/*
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/bootstrap/cache
+
+# Update ENV File and Generate An Encryption Key
+sudo touch {{ laravel_app_directory }}/.env
+sudo cp {{ laravel_app_directory }}/.env.example {{ laravel_app_directory }}/.env
+sudo php artisan key:generate
+
+# Change some environmental variables in the .env file
+sudo sed -i 's/DB_DATABASE={{ db_name }}/DB_DATABASE={{ db_name_placeholder }}/' {{ laravel_app_directory }}/.env
+sudo sed -i 's/DB_PASSWORD={{ db_password }}/DB_PASSWORD={{ db_password_placeholder }}/' {{ laravel_app_directory }}/.env
+sudo sed -i 's/DB_USERNAME={{ db_user }}/DB_USERNAME={{ db_user_placeholder }}/' {{ laravel_app_directory }}/.env
+
+# Configuration of MySQL database
+sudo systemctl start mysql
+
+# Function to execute a MySQL query
+sudo mysql -u root <<EOF
+
+# MySQL username and password
+DB_USERNAME="{{ db_user_placeholder }}"
+DB_PASSWORD="{{ db_password_placeholder }}"
+
+execute_query() {
+    local query="$1"
+    local database="$2"
+    mysql -u "$DB_USERNAME" -p"$DB_PASSWORD" "$database" -e "$query"
+}
+
+# Function to create a database
+create_database() {
+    local database="$1"
+    execute_query "CREATE DATABASE IF NOT EXISTS $database"
+}
+
+# Grant privileges for creating databases
+execute_query "GRANT CREATE DATABASE ON *.* TO '$DB_USERNAME'@'localhost';" "mysql"
+
+# Create a database
+execute_query "CREATE DATABASE IF NOT EXISTS {{ db_name_placeholder }};" "mysql"
+
+# Start MySQL service
+sudo systemctl start mysql
+EOF
+
+# Cache the configurations made
+php artisan config:cache
+
+# MIGRATING THE SERVER
+php artisan migrate
+
+# RESTART APACHE
+sudo systemctl restart apache2
