@@ -3,8 +3,8 @@
 # Laravel Application Configuration
 # Define variables for the Laravel application installation and setup.
 laravel_app_directory="/var/www/html/laravel"      # Specify the Laravel application directory
-laravel_owner="emmanuel"                          # Owner for Laravel files
-laravel_owner_group="emmanuel"                    # Owner group for Laravel files
+laravel_owner="altschool"                          # Owner for Laravel files
+laravel_owner_group="altschool"                    # Owner group for Laravel files
 laravel_app_repo="https://github.com/laravel/laravel.git"  # Laravel application repository URL
 
 # LAMP Stack Deployment
