@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# -------------VARAIBLES------------------
-box_name="ubuntu/focal64" # You can set this to the desired box name
+# Vagrant Configuration
+# Define variables for box names, VM names, user names, and memory settings.
+box_name="ubuntu/focal64" 
 master_vm="master"
 slave_vm="slave"
 master_user="altschool"
 slave_user="slave"
 vb_memory="1024"
 
-# --------VAGRANT FILE CONFIGURATION---------
-# Define the Vagrantfile for the Master node
+# Generate Vagrant Configuration
+# This code generates a Vagrantfile that defines the configuration for both the Master and Slave nodes.
 cat <<EOL > Vagrantfile
-# Define the Vagrantfile for the Master node
 Vagrant.configure("2") do |config|
   config.vm.define "$master_vm" do |master|
     master.vm.box = "$box_name"
@@ -22,7 +22,6 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  # Define the Vagrantfile for the Slave node
   config.vm.define "$slave_vm" do |slave|
     slave.vm.box = "$box_name"
     slave.vm.network "private_network", type: "dhcp"
@@ -34,10 +33,13 @@ Vagrant.configure("2") do |config|
 end
 EOL
 
-#---SETTING UP THE VIRTUAL MACHINES/INFRASTRUCTURE CONFIGURATION---
-# Create and provision the Master and Slave nodes
+# Initialize and Provision Vagrant Nodes
+# This code starts the Vagrant virtual machines. It then SSHs into the Master node and performs the following tasks:
+# - Creates a user with a specified password.
+# - Grants the user root privileges.
+# - Sets an environment variable to identify the node type.
+# - Generates an SSH key pair for the user if one doesn't exist.
 vagrant up
-
 # SSH into the Master node
 vagrant ssh "$master_vm" << ENDSSH
   # Create a user
