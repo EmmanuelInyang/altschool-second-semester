@@ -31,3 +31,5 @@ Before running this script, ensure you have the following prerequisites:
    ```bash
    sh vagrant-ubuntu.sh
 
+4. 
+
