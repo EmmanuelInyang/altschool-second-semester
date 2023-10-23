@@ -1,2 +1,2 @@
-[test]
+[slaveserver]
 slave ansible_host=192.168.56.92 ansible_pass=altschool ansible_user=altschool  ansible_ssh_private_key_file=/home/altschool/.ssh/id_rsa
