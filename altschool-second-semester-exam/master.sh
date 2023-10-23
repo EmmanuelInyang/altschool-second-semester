@@ -7,6 +7,12 @@ laravel_owner="altschool"                          # Owner for Laravel files
 laravel_owner_group="altschool"                    # Owner group for Laravel files
 laravel_app_repo="https://github.com/laravel/laravel.git"  # Laravel application repository URL
 
+apache_virtual_host_name=""
+server_admin_email=""
+server_name=""
+document_root=""
+apache_log_dir=""
+
 # Update Package List and Upgrade Installed Packages
 # The following code updates the package list to the latest available version of software packages.
 # It then upgrades the installed packages to their latest versions, applying any available updates.
@@ -77,20 +83,20 @@ php -r "unlink('composer-setup.php');"
 # The following code appends a VirtualHost configuration to the specified Apache site file.
 # It defines the server administrator's email, server name or IP address, document root,
 # directory options, and log file locations for Apache.
-sudo tee -a /etc/apache2/sites-available/{{ apache_virtual_host_name }} <<EOF
+sudo tee -a "/etc/apache2/sites-available/$apache_virtual_host_name" <<EOF
 <VirtualHost *:80>
-     ServerAdmin {{ server_admin_email }}
-     ServerName {{ server_name }}
-     DocumentRoot {{ document_root }}
+     ServerAdmin "$server_admin_email"
+     ServerName "$server_name"
+     DocumentRoot "$document_root"
 
-     <Directory {{ document_root }}>
+     <Directory "$document_root">
         Options Indexes Multiviews FollowSymlinks
         AllowOverride All
         Require all granted
      </Directory>
 
-     ErrorLog {{ apache_log_dir }}/error.log
-     CustomLog {{ apache_log_dir }}/access.log combined
+     ErrorLog "$apache_log_dir/error.log"
+     CustomLog "$apache_log_dir/access.log" combined
  </VirtualHost>
 EOF
 
@@ -99,7 +105,7 @@ EOF
 sudo a2enmod rewrite              
 # Enable the Apache virtual host configuration for your web application.
 # This makes the web application accessible through the specified server name or IP address.                  
-sudo a2ensite {{ apache_virtual_host_name }}  
+sudo a2ensite "$apache_virtual_host_name"  
 # Disable the default Apache virtual host (usually named '000-default') if it's enabled.
 # This step ensures that your web application's virtual host takes precedence.     
 sudo a2dissite 000-default   
