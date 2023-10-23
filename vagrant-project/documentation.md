@@ -1,7 +1,7 @@
 <h1>vagrant-ubuntu.sh</h1>
-## Vagrant LAMP Stack Deployment
 
-<p>This script automates the setup and deployment of a LAMP (Linux, Apache, MySQL, PHP) stack on two Vagrant virtual machines, referred to as the "Master" and "Slave" nodes. To accomplish this, It performs the following steps:</p>
+## Vagrant LAMP Stack Deployment
+This script automates the setup and deployment of a LAMP (Linux, Apache, MySQL, PHP) stack on two Vagrant virtual machines, referred to as the "Master" and "Slave" nodes. To accomplish this, It performs the following steps:
 
    - Configure the Vagrantfile with the defined VM settings.
    - Create and provision the Master and Slave VMs.
