@@ -1,66 +1,77 @@
 #!/bin/bash
 
-# APACHE CONFIGURATION
-# Update Apt Package manager
-echo -e "\n\nUpdating Apt Package\n"
-sudo apt-get update -y
+# Update Package List and Upgrade Installed Packages
+# The following code updates the package list to the latest available version of software packages.
+# It then upgrades the installed packages to their latest versions, applying any available updates.
+sudo apt-get update
 sudo apt-get upgrade -y
 
-# Installing Apache
-sudo apt-get install apache2 -y
+# Install and Configure Apache Web Server
+# The following code installs the Apache web server, enables it to start automatically on system boot,
+# and starts the Apache service.
+sudo apt install apache2 -y               
+sudo systemctl enable apache2             
+sudo systemctl start apache2     
 
-# To ensure Apache is running and set to start on boot.
-echo -e "\n\nStarting Apache\n"
-sudo systemctl start apache2
-echo -e "\n\nEnabling Apache to start on boot\n"
-sudo systemctl enable apache2
-
-# To configure firewall rule
-echo -e "\n\nAdding firewall rule to Apache\n"
+# Configure Firewall Rule for Apache
+# The following code adds a firewall rule to allow incoming traffic on port 80 (HTTP) for Apache.
+# It ensures that the Apache web server can receive and respond to HTTP requests.
 sudo ufw allow 80/tcp
 
-# MYSQL CONFIGURATION
-# Update Apt Package Manager
-echo -e "\n\nUpdating Apt Package\n"
+# Install and Configure MySQL Server
+# This code updates package information, installs MySQL Server, starts the MySQL service,
+# and configures it to start automatically on system boot.
 sudo apt-get update -y
+sudo apt install mysql-server -y          
+sudo systemctl start mysql                
+sudo systemctl enable mysql             
 
-# Installing MySQL
-echo -e "\n\nInstalling MySQL\n"
-sudo apt-get install mysql-server -y
-
-# Start and enable MySQL to start and enable to run on system boot
-sudo systemctl start mysql
-sudo systemctl enable mysql
-
-# Secure MySQL Installation
+# Secure MySQL Installation (Using Default Settings).
+# The following code initiates the MySQL secure installation process with default settings.
+# It provides predefined responses to set the root password and enforce security configurations.
+# The options include setting a password, removing anonymous users, disallowing root login remotely,
+# removing the test database, and applying changes to privileges.
 sudo mysql_secure_installation <<EOF
-n
-n
-n
-n
-y
+    password
+    Y
+    Y
+    Y
+    Y
+    Y
 EOF
 
-# INSTALLING PHP USING PPA:ONDRE
-# Installing PHP using the ppa:ondrej/php package repo.
-sudo apt-get install software-properties-common
-sudo add-apt-repository -y ppa:ondrej/php
-sudo apt-get update
-sudo apt-get install libapache2-mod-php php php-common php-xml php-mysql php-gd php-mbstring php-tokenizer php-json php-bcmath php-curl php-zip unzip -y
+# Install PHP and Required Modules
+# The following code installs PHP and related modules:
+# - libapache2-mod-php: Apache PHP module for web server integration.
+# - php-cli: PHP Command Line Interface (CLI) for executing PHP scripts from the command line.
+# - php-cgi: PHP CGI for running PHP scripts independently of Apache.
+# - php-mysql: PHP support for MySQL databases.
+# After installation, Apache is restarted to apply changes.
+sudo apt install php libapache2-mod-php -y    
+sudo apt install php-cli -y                   
+sudo apt install php-cgi -y                   
+sudo apt install php-mysql -y                 
+sudo systemctl restart apache2                
 
-# CONFIGURATION OF PHP
-sudo sed -i 's/cgi.fix_pathinfo=0/' /etc/php/{{ php_version }}/apache2/php.ini
-# After configuring PHP, we need to restart Apache
-sudo systemctl restart apache2
-# Install Composer since it is a PHP dependency manager that manages the dependencies and libraries that PHP applications require
-curl -sS https://getcomposer.org/installer | php
-# Move the downloaded binary to the system directory
-sudo mv composer.phar /usr/local/bin/composer
+# Configure PHP
+# Ensure that the package lists on your Ubuntu system are up to date to have access to the latest package information.
+sudo apt update
+# Install necessary prerequisites, including 'curl' for downloading files, 'php-zip' for handling ZIP archives,
+# and 'unzip' for extracting ZIP files. The '-y' flag automatically answers "yes" to
+# any installation prompts, streamlining the process.
+sudo apt install curl php-zip unzip -y
+# Download the Composer installation script from getcomposer.org and execute it. This script downloads Composer and installs
+# it in the /usr/local/bin directory with the name 'composer'. After installation, the setup script is removed.
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+php -r "unlink('composer-setup.php');"
 
-# CONFIGURATION OF APACHE WEB SERVER
+# Configure Apache Virtual Host
+# The following code appends a VirtualHost configuration to the specified Apache site file.
+# It defines the server administrator's email, server name or IP address, document root,
+# directory options, and log file locations for Apache.
 sudo tee -a /etc/apache2/sites-available/{{ apache_virtual_host_name }} <<EOF
 <VirtualHost *:80>
-
      ServerAdmin {{ server_admin_email }}
      ServerName {{ server_name }}
      DocumentRoot {{ document_root }}
@@ -76,83 +87,105 @@ sudo tee -a /etc/apache2/sites-available/{{ apache_virtual_host_name }} <<EOF
  </VirtualHost>
 EOF
 
-# Activate the Apache rewrite module using the following command
-echo -e "\n\nEnabling Modules\n"
-sudo a2enmod rewrite
-echo -e "\n\nEnabling Laravel virtual host"
-sudo a2ensite {{ apache_virtual_host_name }}
-echo -e "\n\nDisabling Apache default host"
-sudo a2dissite 000-default
+# Enable Apache Rewrite Module and Virtual Host Configuration.
+# Activate the Apache rewrite module to enable URL rewriting, which is often used by web applications.
+sudo a2enmod rewrite              
+# Enable the Apache virtual host configuration for your web application.
+# This makes the web application accessible through the specified server name or IP address.                  
+sudo a2ensite {{ apache_virtual_host_name }}  
+# Disable the default Apache virtual host (usually named '000-default') if it's enabled.
+# This step ensures that your web application's virtual host takes precedence.     
+sudo a2dissite 000-default   
+# Restart Apache to apply changes.                       
+sudo systemctl restart apache2                     
 
-# Restart Apache
-sudo systemctl restart apache2
+# Installing Laravel
+# Create the directory that will hold the Laravel application files.
+sudo mkdir {{ laravel_app_directory }} 
+# Change the working directory to the newly created Laravel directory.
+cd {{ laravel_app_directory }}   
+# Set ownership and permissions for the Laravel application directory.
+# This ensures the web server (e.g., Apache) can read and write to the Laravel files.            
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}   
 
-# INSTALLING LARAVEL
-# Create the folder that will hold the application
-sudo mkdir {{ laravel_app_directory }} && cd {{ laravel_app_directory }}
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}
+# Clone and Set Up the Laravel Application
+# Update system packages to ensure the availability of required tools.
+sudo apt update                                           
+# Install Git and Composer, essential for managing and deploying the Laravel application.
+sudo apt-get install git composer -y                      
+# Clone the Laravel application repository to the specified directory.
+sudo -u {{ laravel_owner }} git clone {{ laravel_app_repo }} {{ laravel_app_directory }}  
+# Set the appropriate ownership of the Laravel application directory for the web server.
+sudo chown -R $USER {{ laravel_app_directory }}     
+# Change the working directory to the Laravel application root.       
+cd {{ laravel_app_directory }}                             
+# Install application dependencies using Composer, excluding development dependencies.
+composer install --no-dev                                  
 
-# Clone the Laravel application
-sudo apt-get update
-sudo apt-get install git composer -y
-sudo -u {{ laravel_owner }} git clone {{ laravel_app_repo }} {{ laravel_app_directory }}
-sudo chown -R $USER {{ laravel_app_directory }}
-cd {{ laravel_app_directory }}
-composer install --no-dev
+# Grant Apache User Ownership of Laravel Directory.
+# Set the ownership and permissions of the Laravel application directory to ensure that the web server (e.g., Apache)
+# can read and write to specific subdirectories where application files and caches are stored.
+# Grant ownership to the Apache user and group for the Laravel application directory.
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}                   
+# Grant ownership to the Apache user and group for the 'storage' directory within the Laravel application.
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/storage/*         
+# Grant ownership to the Apache user and group for the 'bootstrap' directory within the Laravel application.
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/bootstrap/*       
+# Grant ownership to the Apache user and group for the 'bootstrap/cache' directory within the Laravel application.
+sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/bootstrap/cache 
 
-# Give Apache permissions over the Laravel directory
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/storage/*
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/bootstrap/*
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/bootstrap/cache
+# Update Laravel Environment Configuration and Generate Encryption Key.
+# Create or update the Laravel environment configuration file '.env' in the application directory.
+sudo touch {{ laravel_app_directory }}/.env       
+# Copy the template '.env.example' to '.env' to provide initial configuration settings.
+sudo cp {{ laravel_app_directory }}/.env.example {{ laravel_app_directory }}/.env       
+# Generate a secure encryption key for the Laravel application. This key is used for various security purposes.
+sudo php artisan key:generate                                                           
 
-# Update ENV File and Generate An Encryption Key
-sudo touch {{ laravel_app_directory }}/.env
-sudo cp {{ laravel_app_directory }}/.env.example {{ laravel_app_directory }}/.env
-sudo php artisan key:generate
+# Update Environmental Variables in the Laravel .env Configuration.
+# Replace the 'DB_DATABASE' value in the Laravel configuration with the provided database name.
+sudo sed -i 's/DB_DATABASE={{ db_name }}/DB_DATABASE={{ db_name_placeholder }}/' {{ laravel_app_directory }}/.env          
+# Replace the 'DB_PASSWORD' value in the Laravel configuration with the provided database password.
+sudo sed -i 's/DB_PASSWORD={{ db_password }}/DB_PASSWORD={{ db_password_placeholder }}/' {{ laravel_app_directory }}/.env   
+# Replace the 'DB_USERNAME' value in the Laravel configuration with the provided database username.
+sudo sed -i 's/DB_USERNAME={{ db_user }}/DB_USERNAME={{ db_user_placeholder }}/' {{ laravel_app_directory }}/.env         
 
-# Change some environmental variables in the .env file
-sudo sed -i 's/DB_DATABASE={{ db_name }}/DB_DATABASE={{ db_name_placeholder }}/' {{ laravel_app_directory }}/.env
-sudo sed -i 's/DB_PASSWORD={{ db_password }}/DB_PASSWORD={{ db_password_placeholder }}/' {{ laravel_app_directory }}/.env
-sudo sed -i 's/DB_USERNAME={{ db_user }}/DB_USERNAME={{ db_user_placeholder }}/' {{ laravel_app_directory }}/.env
-
-# Configuration of MySQL database
+# Start the MySQL Database Service.
+# This command starts the MySQL database service, making it operational and ready to accept database connections.
 sudo systemctl start mysql
-
-# Function to execute a MySQL query
+# Configure MySQL Database and Create a Database
+# The following block of code executes MySQL queries to configure the database:
+# - Sets up a function to execute MySQL queries using the provided username and password.
+# - Creates a function to create a database if it doesn't exist.
+# - Grants privileges for creating databases to the specified user.
+# - Finally, it creates a specific database if it doesn't already exist and starts the MySQL service.
 sudo mysql -u root <<EOF
-
-# MySQL username and password
 DB_USERNAME="{{ db_user_placeholder }}"
 DB_PASSWORD="{{ db_password_placeholder }}"
 
 execute_query() {
-    local query="$1"
-    local database="$2"
-    mysql -u "$DB_USERNAME" -p"$DB_PASSWORD" "$database" -e "$query"
+    local query="\$1"
+    local database="\$2"
+    mysql -u "\$DB_USERNAME" -p"\$DB_PASSWORD" "\$database" -e "\$query"
 }
 
-# Function to create a database
 create_database() {
-    local database="$1"
-    execute_query "CREATE DATABASE IF NOT EXISTS $database"
+    local database="\$1"
+    execute_query "CREATE DATABASE IF NOT EXISTS \$database"
 }
 
-# Grant privileges for creating databases
-execute_query "GRANT CREATE DATABASE ON *.* TO '$DB_USERNAME'@'localhost';" "mysql"
+execute_query "GRANT CREATE DATABASE ON *.* TO '\$DB_USERNAME'@'localhost';" "mysql"
 
-# Create a database
-execute_query "CREATE DATABASE IF NOT EXISTS {{ db_name_placeholder }};" "mysql"
+create_database "{{ db_name_placeholder }}"
 
-# Start MySQL service
 sudo systemctl start mysql
 EOF
 
-# Cache the configurations made
+# Cache Laravel Configurations, Migrate Database, and Restart Apache
+# The following steps are executed to finalize the setup:
+# Cache Laravel configurations to improve performance.
 php artisan config:cache
-
-# MIGRATING THE SERVER
+# Migrate the database to apply any pending migrations.
 php artisan migrate
-
-# RESTART APACHE
+# Restart the Apache web server to apply the changes.
 sudo systemctl restart apache2
