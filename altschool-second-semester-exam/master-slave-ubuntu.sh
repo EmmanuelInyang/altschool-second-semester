@@ -6,16 +6,8 @@ box_name="ubuntu/focal64"     # Vagrant box name, can be customized to desired b
 master_vm="master"           # Name of the master VM
 slave_vm="slave"             # Name of the slave VM
 master_user="altschool"      # Username for the master VM
-slave_user="slave"           # Username for the slave VM
+slave_user="altschool"           # Username for the slave VM
 vb_memory="1024"             # Memory allocation for VMs (in MB)
-
-# Laravel Application Configuration
-# Define variables for the Laravel application installation and setup.
-laravel_app_directory="/var/www/html/laravel"      # Specify the Laravel application directory
-laravel_owner="www-data"                          # Owner for Laravel files
-laravel_owner_group="www-data"                    # Owner group for Laravel files
-laravel_app_repo="https://github.com/laravel/laravel.git"  # Laravel application repository URL
-
 
 # Generate Vagrant Configuration
 # This code generates a Vagrantfile that defines the configuration for both the Master and Slave nodes.
