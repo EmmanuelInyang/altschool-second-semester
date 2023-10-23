@@ -29,5 +29,5 @@ Before running this script, ensure you have the following prerequisites:
 3. **Run the Script:**
 
    ```bash
-   ./your-script.sh
+   sh vagrant-ubuntu.sh
 
