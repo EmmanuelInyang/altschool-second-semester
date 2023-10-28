@@ -173,6 +173,7 @@ vagrant ssh "$master_vm" << ENDSSH
     sudo chmod 600 /home/"$master_user"/plays/ansible.cfg
     sudo chown -R "$master_user:$master_user" /home/"$master_user"/plays/ansible.cfg
     echo -e "$ansible_cfg" | sudo tee -a /home/"$master_user"/plays/ansible.cfg
+    echo "Content added to ansible.cfg"
 ENDSSH
 
 
