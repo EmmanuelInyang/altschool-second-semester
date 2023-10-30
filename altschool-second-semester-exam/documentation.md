@@ -30,7 +30,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
          sh master-slave-setup.sh
       
    #### master-slave-setup.sh
-   This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning. It         covers the following steps:
+   This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning. It        covers the following steps:
    1. **Variables Setup**
       - Defines the Virtual machine names, memory allocation, user settings, network settings, and Ubuntu version.
       - Sets the SSH key file location.
@@ -71,41 +71,28 @@ Here are the steps to run this script in an Ubuntu-based environment:
 
    #### master.sh
    This bash automates the deployment of a Laravel web application on the master virtual machine. It provides a detailed sequence of steps    for configuring the Laravel application, the Apache web server, and the associated database. Here's a breakdown of the script's            sections and their respective functions:
+   1. **Variables**
+      - This script sets several variables used for configuring the Laravel application, Apache web server, and the database.
 
-   ## Variables
-   This script sets several variables used for configuring the Laravel application, Apache web server, and the database. These variables      include:
-      - `master_vm`: The name of the virtual machine.
-      - `laravel_app_directory`: The directory where the Laravel application will be installed.
-- `laravel_owner` and `laravel_owner_group`: The owner and owner group for the Laravel application files.
-- `laravel_app_repo`: The URL of the Laravel application's Git repository.
-- `apache_log_dir`: The directory where Apache web server logs are stored.
-- `document_root`: The document root for the Apache web server, pointing to the Laravel application's public directory.
-- `server_admin_email`: The email address for the server administrator.
-- `server_name`: The server name, typically the IP address, determined dynamically within the Vagrant environment.
-- `apache_virtual_host_name`: The name of the Apache virtual host configuration file.
-- `apache_virtual_host_location`: The location of the Apache virtual host configuration file.
-- `db_name`, `db_password`, and `db_user`: Database-related variables.
-- `ip_address`: The IP address obtained from the Vagrant environment.
+   2. **Update Package List and Upgrade Installed Packages**
+      - The script first updates the package list to ensure it has the latest versions of software packages available. It then upgrades            the installed packages to their latest versions, applying any available updates.
 
-## Update Package List and Upgrade Installed Packages
-The script first updates the package list to ensure it has the latest versions of software packages available. It then upgrades the installed packages to their latest versions, applying any available updates.
+   3. **Install and Configure Apache Web Server**
+      - This section installs the Apache web server, enabling it to start automatically on system boot, and starts the Apache service.
 
-## Install and Configure Apache Web Server
-This section installs the Apache web server, enabling it to start automatically on system boot, and starts the Apache service.
+   4. **Install and Configure MySQL Server**
+      - The script updates package information, installs MySQL Server, starts the MySQL service, and configures it to start automatically          on system boot.
 
-## Install and Configure MySQL Server
-The script updates package information, installs MySQL Server, starts the MySQL service, and configures it to start automatically on system boot.
+   5. **Install PHP and Required Modules**
+      - This part of the script installs PHP 8.1 and related modules, including common utilities, prerequisites, and the Ondřej Surý PPA           repository. It then installs PHP 8.1 and related modules and restarts the Apache web server.
 
-## Install PHP and Required Modules
-This part of the script installs PHP 8.1 and related modules, including common utilities, prerequisites, and the Ondřej Surý PPA repository. It then installs PHP 8.1 and related modules and restarts the Apache web server.
+   6. **Configure PHP**
+      - This script updates the package list for PHP configuration, installs necessary prerequisites for PHP configuration, and configures         PHP for the Laravel application.
 
-## Configure PHP
-This script updates the package list for PHP configuration, installs necessary prerequisites for PHP configuration, and configures PHP for the Laravel application.
+   7. **Create the Laravel Application Directory and Set Permissions**
+      - This section creates the directory for storing the Laravel application files and sets the necessary ownership and permissions for          the directory.
 
-## Create the Laravel Application Directory and Set Permissions
-This section creates the directory for storing Laravel application files and sets the necessary ownership and permissions for the directory.
-
-## Clone and Set Up the Laravel Application
+    8. **Clone and Set Up the Laravel Application**
 The script updates system packages, installs Git, and clones the Laravel application repository. It then grants the Apache user ownership of specific Laravel directories.
 
 ## Install Laravel Application Dependencies
