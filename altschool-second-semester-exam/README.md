@@ -23,7 +23,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
          touch master-slave-setup.sh
 
 5. **Grant the necessary permission:**
-   - For the Bash script to be executable, I granted the required permissions using the command:
+   - For the Bash script to be executable, I granted the required permission using the command:
       ```bash
             chmod +x master-slave-setup.sh
 
