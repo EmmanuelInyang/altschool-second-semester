@@ -1,17 +1,18 @@
 # USAGE
 Here are the steps to run this script in an Ubuntu-based environment:
 
-1. **Get Started::** <br>
-   I opened my terminal or code editor.
-2. **Create a directory:**
+1. **Get Started:** <br>
+   I opened my code editor terminal.
+   <br>
+3. **Create a directory:**
    I decided to name the directory "altschool-second-semester-exam" and created it using the following command:
    ```bash
    mkdir altschool-second-semester-exam
-3. **Navigate into the directory:**
+4. **Navigate into the directory:**
    I changed my working directory to the newly created "altschool-second-semester-exam" directory:
    ```bash
    cd altschool-second-semester-exam
-4. **Write the setup script for virtual machines:**
+5. **Write the setup script for virtual machines:**
    To write the setup script for the virtual machines (Master and Slave), I first created a ".sh" file with name "master-slave-setup.sh"       usimg this command:
    ```bash
    touch master-slave-setup.sh
