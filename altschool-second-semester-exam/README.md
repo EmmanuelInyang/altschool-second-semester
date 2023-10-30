@@ -28,7 +28,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
          chmod +x master-slave-setup.sh
 
 6. **Execute the master-slave-setup script:**
-   - Finally, I executed the script with the command:
+   - Next, I executed the script with the command:
       ```bash
          sh master-slave-setup.sh
 
