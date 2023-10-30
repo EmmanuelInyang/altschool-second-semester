@@ -1,22 +1,31 @@
 <h2>Cloud Engineering Second Semester Examination Project (Deploy LAMP Stack) </h2>
-<h3>Objective</h3>
-<ul><li>Automate the provisioning of two Ubuntu-based servers, named "Master" and "Slave", using Vagrant.</li>
-<li>On the Master node, create a bash script to automate the deployment of a LAMP (Linux, Apache, MySQL, PHP) stack.</li>
-<li>This script should clone a PHP application from GitHub, install all necessary packages, and configure Apache web server and MySQL.</li>
-<li>Ensure the bash script is reusable and readable.</li>
-<li>Using an Ansible playbook:</li><ol>
-  <li>Execute the bash script on the Slave node and verify that the PHP application is accessible through the VM's IP address (take a screenshot of this as evidence)</li>
-  <li>Create a cron job to check the server's uptime every 12 a.m.</li>
-</ol>
-</ul>
+### STEPS
+Here are the steps to run this script in an Ubuntu-based environment:
 
-<h3>Requirements</h3>
-<ol><li>Submit the bash script and Ansible playbook to (publicly accessible) GitHub repository.</li>
-<li>Document the steps with screenshots in md files, including proof of the application's accessibility (screenshots taken where necessary)</li>
-<li>Use either the VM's IP address or a domain name as the URL.</li>
-</ol>
+1. **Get Started:** 
+   - To begin, I opened my code editor terminal.
+     
+2. **Create a directory:** <br>
+   - I chose to name the directory "altschool-second-semester-exam" and initiated it using the following command:
+      ```bash
+         mkdir altschool-second-semester-exam
 
-<h2>PHP Laravel GitHub Repository:</h2>
-<link>
-https://github.com/laravel/laravel</link>
-<ol></ol>
+3. **Navigate into the directory:**
+   - I then changed my working directory to the newly created "altschool-second-semester-exam" directory:
+      ```bash
+         cd altschool-second-semester-exam
+      
+4. **Create a Bash script file:**
+   - I proceeded to create a Bash script file using the following command:
+      ```bash
+         touch master-slave-setup.sh
+
+5. **Grant the necessary permission:**
+   - For the Bash script to be executable, I granted the required permissions using the command:
+      ```bash
+         chmod +x altschool-second-semester-exam
+
+6. **Execute the master-slave-setup script:**
+   - Finally, I executed the script with the command:
+      ```bash
+         sh master-slave-setup.sh
