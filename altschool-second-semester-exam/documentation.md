@@ -14,20 +14,20 @@ Here are the steps to run this script in an Ubuntu-based environment:
       ```bash
          cd altschool-second-semester-exam
       
-5. **Create a Bash script file:**
+4. **Create a Bash script file:**
    - Created a Bash script file, with the command the following command:
       ```bash
-      touch master-slave-setup.sh
+         touch master-slave-setup.sh
 
-7. **Grant the necessary permission:**
+5. **Grant the necessary permission:**
    - Granted permission to make the bash script file an executable, with the following command:
-   ```bash
-      chmod +x altschool-second-semester-exam
+      ```bash
+         chmod +x altschool-second-semester-exam
 
-9. **Execute this script:**
+6. **Execute this script:**
    - Executed the script using:
-   ```bash
-      sh master-slave-setup.sh
+      ```bash
+         sh master-slave-setup.sh
 
    
 
