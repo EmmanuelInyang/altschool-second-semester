@@ -55,7 +55,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
          ```bash
             sh master.sh
 <br>
-
+<br>
 **After the master.sh script completion, the Lamp stack installation on the master node was successful, and the Laravel GitHub repository was cloned without issues. The subsequent step involved testing the Laravel application.**
 
 8. **Testing the Laravel Application on the Master node:**
