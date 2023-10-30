@@ -18,8 +18,8 @@ Here are the steps to run this script in an Ubuntu-based environment:
    To write the setup script for the virtual machines (Master and Slave), I first created a ".sh" file with the name "master-slave-         
    setup.sh" using this command:
    ```bash
-      touch master-slave-setup.sh
-
+      touch master-slave-setup.sh <br>
+   
    then granted execution permissions to the script using:  
    
 
