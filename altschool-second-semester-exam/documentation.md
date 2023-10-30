@@ -29,16 +29,16 @@ Here are the steps to run this script in an Ubuntu-based environment:
       ```bash
          sh master-slave-setup.sh
       
-   #### master-slave-setup.sh
+      #### master-slave-setup.sh
 
-   This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning. It         covers the following steps:
+      This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning. It         covers the following steps:
 
-   1. **Variables Setup**
-      - Defines the Virtual machine names, memory allocation, user settings, network settings, and Ubuntu version.
-      - Sets the SSH key file location.
+      1. **Variables Setup**
+         - Defines the Virtual machine names, memory allocation, user settings, network settings, and Ubuntu version.
+         - Sets the SSH key file location.
 
-   2. **Vagrant Configuration**
-      - Generates a `Vagrantfile` to configure the Vagrant virtual machines.
+      2. **Vagrant Configuration**
+         - Generates a `Vagrantfile` to configure the Vagrant virtual machines.
         
    3. **Vagrant Initialization**
       - Initializes and provisions Vagrant virtual machines.
