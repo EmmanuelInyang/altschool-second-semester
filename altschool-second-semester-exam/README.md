@@ -37,6 +37,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
    <br>
    
 **After installing the master-slave-ubuntu.sh script, the next step I took was creating a script to automate the installation of LAMP stack on the master node (VM).**
+   <br>
    
 8. **Creating a Bash script file (master.sh)**
    - I ran the command on the terminal to create the Bash script file:
