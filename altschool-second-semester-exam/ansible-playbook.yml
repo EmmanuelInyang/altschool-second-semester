@@ -1,49 +1,81 @@
 ---
-
-- name: Deploy PHP Application and create Cron jobs on Slave node
+# PLAY: INSTALL LAMP STACK
+- name: Install LAMP Stack
   hosts: slaveserver
   vars:
-    bash_script_src: /home/vagrant/slave.sh.j2
-    bash_script_dest: /home/vagrant/Ansible/slave.sh
-    cron_job_name: schedule to check uptime server
-    cron_minute: "0"
-    cron_hour: "0"
-    cron_day: "*"
-    cron_month: "*"
-    cron_weekday: "*"
-    cron_command: "/usr/bin/uptime > /var/log/uptime.log 2>&1"
+    # Virtual Machine
+    slave_vm: "slave"
+
+    # Laravel Application Configuration
+    project_name: "laravel" # - The name of the Laravel project.
+    laravel_owner: "www-data" # - This variable represents the owner of the Laravel application files.
+    laravel_owner_group: "www-data" # - The owner group for the Laravel application files.
+    laravel_app_repo: "https://github.com/laravel/laravel.git" # - The URL of the Laravel application's Git repository.
+    
+    # Apache Web Server Configuration
+    apache_log_dir: "/var/log/apache2" # - The directory where Apache web server logs are stored.
+    document_root: "/var/www/html/{{ project_name }}/public" # - The document root for the Apache web server.
+    server_admin_email: "inyang156@gmail.com" # - The email address for the server administrator.
+    server_name: "{{ project_name }}.local" # - The server name, typically the IP address, determined dynamically within the Vagrant environment.
+    apache_virtual_host_name: "{{ project_name }}.conf" # - The name of the Apache virtual host configuration file.
+    apache_virtual_host_location: "/etc/apache2/sites-available" # - The location of the Apache virtual host configuration file.
+    
+    # Database Configuration For Laravel Application
+    db_name: "{{ project_name }}" # - The name of the database used by the Laravel application.
+    db_password: "password" # - The password for the database user.
+    db_user: "{{ project_name }}" # - The username for connecting to the database.
+
+    # Bash Script (Using Jinja2 Template).
+    bash_script_src: /home/altschool/play/slave.sh.j2
+    bash_script_dest: /tmp/slave.sh
+
+    # Test the PHP Application.
     php_app_url: "http://{{ ansible_host }}"
     php_app_verification_string: "Laracast"
-
   tasks:
-    - name: Create a cron job to check server uptime
-      cron:
-        name: "{{ cron_job_name }}"
-        minute: "{{ cron_minute }}"
-        hour: "{{ cron_hour }}"
-        day: "{{ cron_day }}"
-        month: "{{ cron_month }}"
-        weekday: "{{ cron_weekday }}"
-        job: "{{ cron_command }}"
-        state: present
-
-    - name: Copy the bash script
+    # Task: Copy the Bash Script to the Remote Host.
+    - name: Copy the Bash script to the Remote Host
       copy:
-        src: "{{ bash_script_src }}"
-        dest: "{{ bash_script_dest }}"
-        mode: '0777'
+        src: "{{ bash_script_src }}"     
+        dest: "{{ bash_script_dest }}"                            
+        mode: "0755" # File permission.
+      become: yes
 
-    - name: Execute the bash script
-      shell: "bash {{ bash_script_dest }}"
-      ignore_errors: yes
+    # Task: Execute the Bash Script.
+    - name: Execute the Bash Script
+      shell: "{{ bash_script_dest }}"
 
+    # Task: Verify PHP Application Accessibility.
     - name: Verify PHP Application Accessibility
       ansible.builtin.uri:
         url: "{{ php_app_url }}"
         return_content: yes
       register: page_content
 
-    - name: Check if the expected string is in the page contents
+    # Task: Check if the expected String is in the Page contents.
+    - name: Check if the expected String is in the Page contents
       ansible.builtin.fail:
         msg: "The page does not contain '{{ php_app_verification_string }}'"
       when: php_app_verification_string not in page_content.content
+
+# PLAY: CREATE CRON JOB TO CHECK UPTIME.
+- name: Create Cron Job to Check the Server's Uptime every 12AM
+  hosts: slaveserver
+  vars: 
+    cron_job_name: Every 12AM
+    cron_minute: "0"
+    cron_hour: "0"
+    cron_day: "*"
+    cron_month: "*"
+    cron_command: "/usr/bin/uptime > /var/log/uptime.log 2>&1"
+  tasks:
+    # Task: Check the Server's Uptime every 12AM.
+    - name: Check the Server's Uptime every 12AM
+      cron:
+        name: "{{ cron_job_name }}"
+        minute: "{{ cron_minute }}"
+        hour: "{{ cron_hour }}"
+        day: "{{ cron_day }}"
+        month: "{{ cron_month }}"
+        job: "{{ cron_command }}"
+        state: present
