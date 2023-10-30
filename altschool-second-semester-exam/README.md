@@ -51,9 +51,9 @@ Here are the steps to run this script in an Ubuntu-based environment:
     - This bash automates the deployment of a Laravel web application on the master virtual machine.
       
 11. **Execute the master.sh script:**
-   - To execute the master.sh script, I used the command:
-      ```bash
-         sh master.sh
+      - To execute the master.sh script, I used the command:
+         ```bash
+            sh master.sh
 <br>
 
 **After the master.sh script completion, the Lamp stack installation on the master node was successful, and the Laravel GitHub repository was cloned without issues. The subsequent step involved testing the Laravel application.**
