@@ -1,4 +1,5 @@
-##Cloud Engineering Second Semester Examination Project (Deploy LAMP Stack) <br>
+##Cloud Engineering Second Semester Examination Project (Deploy LAMP Stack)
+
 ##STEPS
 
 Here are the steps to run this script in an Ubuntu-based environment:
