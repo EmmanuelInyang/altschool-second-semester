@@ -5,22 +5,22 @@ Here are the steps to run this script in an Ubuntu-based environment:
    - I opened my code editor terminal.
      
 2. **Create a directory:** <br>
-   - I decided to name the directory "altschool-second-semester-exam" and created it using the following command:
+   - Decided to name the directory "altschool-second-semester-exam" and created it using the following command:
       ```bash
          mkdir altschool-second-semester-exam
 
 3. **Navigate into the directory:**
-   - I changed my working directory to the newly created "altschool-second-semester-exam" directory:
+   - Changed my working directory to the newly created "altschool-second-semester-exam" directory:
       ```bash
          cd altschool-second-semester-exam
       
 5. **Create a Bash script file:**
-   - I created a Bash script file, with the command the following command:
+   - Created a Bash script file, with the command the following command:
       ```bash
       touch master-slave-setup.sh
 
 7. **Grant the necessary permission:**
-   - I granted permission to make the bash script file an executable, with the following command:
+   - Granted permission to make the bash script file an executable, with the following command:
    ```bash
       chmod +x altschool-second-semester-exam
 
