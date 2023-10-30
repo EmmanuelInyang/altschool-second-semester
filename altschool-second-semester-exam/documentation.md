@@ -1,7 +1,7 @@
 # USAGE
 Here are the steps to run this script in an Ubuntu-based environment:
 
-1. **Get Started:** <br>
+1. **Get Started:** 
    - I opened my code editor terminal.
      
 2. **Create a directory:** <br>
@@ -9,19 +9,20 @@ Here are the steps to run this script in an Ubuntu-based environment:
       ```bash
          mkdir altschool-second-semester-exam
 
-3. **Navigate into the directory:** I changed my working directory to the newly created "altschool-second-semester-exam" directory:
+3. **Navigate into the directory:**
+   - I changed my working directory to the newly created "altschool-second-semester-exam" directory:
       ```bash
          cd altschool-second-semester-exam
       
-4. **Create a Bash script file:** I created a Bash script file, with the command the following command:
+5. **Create a Bash script file:** I created a Bash script file, with the command the following command:
    ```bash
       touch master-slave-setup.sh
 
-5. **Grant the necessary permission:** I granted permission to make the bash script file an executable, with the following command:
+6. **Grant the necessary permission:** I granted permission to make the bash script file an executable, with the following command:
    ```bash
       chmod +x altschool-second-semester-exam
 
-6. **Execute this script:** Executed the script using:
+7. **Execute this script:** Executed the script using:
    ```bash
       sh master-slave-setup.sh
 
