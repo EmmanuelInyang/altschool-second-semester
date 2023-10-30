@@ -64,7 +64,71 @@ Here are the steps to run this script in an Ubuntu-based environment:
    9. **Ansible Configuration**
       - Sets up the Ansible configuration file.
 
-   ## Usage
-   1. Review and modify the variables in the script to suit your requirements.
-   2. Run the script in your terminal.
-   For further details on each step, refer to the comments in the script itself.
+7. **Execute the master.sh script:**
+   - To execute the master.sh script, I used the command:
+      ```bash
+         sh master.sh
+
+   #### master.sh
+   This bash automates the deployment of a Laravel web application on the master virtual machine. It provides a detailed sequence of steps    for configuring the Laravel application, the Apache web server, and the associated database. Here's a breakdown of the script's            sections and their respective functions:
+
+   ## Variables
+   This script sets several variables used for configuring the Laravel application, Apache web server, and the database. These variables      include:
+      - `master_vm`: The name of the virtual machine.
+      - `laravel_app_directory`: The directory where the Laravel application will be installed.
+- `laravel_owner` and `laravel_owner_group`: The owner and owner group for the Laravel application files.
+- `laravel_app_repo`: The URL of the Laravel application's Git repository.
+- `apache_log_dir`: The directory where Apache web server logs are stored.
+- `document_root`: The document root for the Apache web server, pointing to the Laravel application's public directory.
+- `server_admin_email`: The email address for the server administrator.
+- `server_name`: The server name, typically the IP address, determined dynamically within the Vagrant environment.
+- `apache_virtual_host_name`: The name of the Apache virtual host configuration file.
+- `apache_virtual_host_location`: The location of the Apache virtual host configuration file.
+- `db_name`, `db_password`, and `db_user`: Database-related variables.
+- `ip_address`: The IP address obtained from the Vagrant environment.
+
+## Update Package List and Upgrade Installed Packages
+The script first updates the package list to ensure it has the latest versions of software packages available. It then upgrades the installed packages to their latest versions, applying any available updates.
+
+## Install and Configure Apache Web Server
+This section installs the Apache web server, enabling it to start automatically on system boot, and starts the Apache service.
+
+## Install and Configure MySQL Server
+The script updates package information, installs MySQL Server, starts the MySQL service, and configures it to start automatically on system boot.
+
+## Install PHP and Required Modules
+This part of the script installs PHP 8.1 and related modules, including common utilities, prerequisites, and the Ondřej Surý PPA repository. It then installs PHP 8.1 and related modules and restarts the Apache web server.
+
+## Configure PHP
+This script updates the package list for PHP configuration, installs necessary prerequisites for PHP configuration, and configures PHP for the Laravel application.
+
+## Create the Laravel Application Directory and Set Permissions
+This section creates the directory for storing Laravel application files and sets the necessary ownership and permissions for the directory.
+
+## Clone and Set Up the Laravel Application
+The script updates system packages, installs Git, and clones the Laravel application repository. It then grants the Apache user ownership of specific Laravel directories.
+
+## Install Laravel Application Dependencies
+The script downloads and installs Composer and uses it to install Laravel application dependencies, excluding development dependencies.
+
+## Update Laravel Environment Configuration and Generate Encryption Key
+The script creates the Laravel environment configuration file '.env', sets file permissions and ownership, copies the template '.env.example' to '.env', and generates an encryption key for the Laravel application.
+
+## Create a New MySQL Database and User
+This part of the script creates a new MySQL database and user.
+
+## Update Environmental Variables in the Laravel .env Configuration
+This section updates environmental variables in the Laravel configuration file '.env'.
+
+## Configure Apache Virtual Host
+The script configures an Apache VirtualHost, specifying server settings, directory options, and log file locations for Apache.
+
+## Append Project Entry to /etc/hosts File
+The script appends an entry to the /etc/hosts file, mapping a hostname to an IP address.
+
+## Enable Apache Rewrite Module and Configure Virtual Host
+This code activates the Apache rewrite module, enables the Laravel virtual host configuration, disables the default Apache virtual host, and restarts the Apache service.
+
+## Cache Laravel Configurations, Migrate Database, and Restart Apache
+Finally, the script caches Laravel configurations to improve performance, migrates the database to apply any pending migrations, and restarts the Apache web server to ensure the changes take effect.
+
