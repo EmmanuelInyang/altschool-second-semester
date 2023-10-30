@@ -45,5 +45,14 @@ Here are the steps to run this script in an Ubuntu-based environment:
 
    - #### master.sh
      This bash automates the deployment of a Laravel web application on the master virtual machine. It provides a detailed sequence of           steps for configuring the Laravel application, the Apache web server, and the associated database.
+<br>
 
-****
+**After the master.sh script completion, the Lamp stack installation on the master node was successful, and the Laravel GitHub repository was cloned without issues. The subsequent step involved testing the Laravel application.**
+
+8. **Testing the Laravel Application**
+   - Access the master node via SSH using the command: vagrant ssh master.
+   - Retrieve the master node's IP address by executing hostname -I within the terminal. The second IP displayed is the correct one to use.
+   - Open your web browser and enter this IP address.
+   - You will be directed to the Laravel application's homepage.
+     <br>
+     Below is a screenshot of the homepage displayed in my browser. 
