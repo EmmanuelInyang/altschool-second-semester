@@ -55,10 +55,10 @@ Here are the steps to run this script in an Ubuntu-based environment:
       - To execute the master.sh script, I used the command:
          ```bash
             sh master.sh
-<br>
-<br>
+      <br>
 **After the master.sh script completion, the Lamp stack installation on the master node was successful, and the Laravel GitHub repository was cloned without issues. The subsequent step involved testing the Laravel application.**
-
+   <br>
+   <br>
 8. **Testing the Laravel Application on the Master node:**
    - Access the master node via SSH using the command: `vagrant ssh master`.
    - Retrieve the master node's IP address by executing `hostname -I` within the terminal. The second IP displayed is the correct one to         use.
