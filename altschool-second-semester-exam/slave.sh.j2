@@ -1,194 +1,257 @@
 #!/bin/bash
 
-# Update Package List and Upgrade Installed Packages
+# -- UPDATE PACKAGE LIST AND UPGRADE INSTALLED PACKAGES --
 # The following code updates the package list to the latest available version of software packages.
 # It then upgrades the installed packages to their latest versions, applying any available updates.
-sudo apt-get update
-sudo apt-get upgrade -y
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    sudo apt-get update
+    sudo apt-get upgrade -y
+ENDSSH
 
-# Install and Configure Apache Web Server
+# -- INSTALL AND CONFIGURE APACHE WEB SERVER -- 
 # The following code installs the Apache web server, enables it to start automatically on system boot,
 # and starts the Apache service.
-sudo apt install apache2 -y               
-sudo systemctl enable apache2             
-sudo systemctl start apache2     
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    sudo apt install apache2 -y
+    sudo systemctl enable apache2
+    sudo systemctl start apache2
+ENDSSH
 
-# Configure Firewall Rule for Apache
-# The following code adds a firewall rule to allow incoming traffic on port 80 (HTTP) for Apache.
-# It ensures that the Apache web server can receive and respond to HTTP requests.
-sudo ufw allow 80/tcp
-
-# Install and Configure MySQL Server
+# -- INSTALL AND CONFIGURE MYSQL SERVER --
 # This code updates package information, installs MySQL Server, starts the MySQL service,
 # and configures it to start automatically on system boot.
-sudo apt-get update -y
-sudo apt install mysql-server -y          
-sudo systemctl start mysql                
-sudo systemctl enable mysql             
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    sudo apt-get update -y
+    sudo apt install mysql-server -y
+    sudo systemctl start mysql
+    sudo systemctl enable mysql
+ENDSSH
 
-# Secure MySQL Installation (Using Default Settings).
-# The following code initiates the MySQL secure installation process with default settings.
-# It provides predefined responses to set the root password and enforce security configurations.
-# The options include setting a password, removing anonymous users, disallowing root login remotely,
-# removing the test database, and applying changes to privileges.
-sudo mysql_secure_installation <<EOF
-    password
-    Y
-    Y
-    Y
-    Y
-    Y
-EOF
+# -- INSTALL PHP AND REQUIRED MODULES --
+# This script installs PHP 8.1 and related modules, following a structured process. Each step is executed in
+# separate SSH sessions for better isolation and clarity.
 
-# Install PHP and Required Modules
-# The following code installs PHP and related modules:
-# - libapache2-mod-php: Apache PHP module for web server integration.
-# - php-cli: PHP Command Line Interface (CLI) for executing PHP scripts from the command line.
-# - php-cgi: PHP CGI for running PHP scripts independently of Apache.
-# - php-mysql: PHP support for MySQL databases.
-# After installation, Apache is restarted to apply changes.
-sudo apt install php libapache2-mod-php -y    
-sudo apt install php-cli -y                   
-sudo apt install php-cgi -y                   
-sudo apt install php-mysql -y                 
-sudo systemctl restart apache2                
+# Updates the system's package list and upgrades installed packages.
+vagrant ssh "{{ slave_vm }}" -c "sudo apt update"
+vagrant ssh "{{ slave_vm }}" -c "sudo apt -y upgrade"
 
-# Configure PHP
-# Ensure that the package lists on your Ubuntu system are up to date to have access to the latest package information.
-sudo apt update
-# Install necessary prerequisites, including 'curl' for downloading files, 'php-zip' for handling ZIP archives,
-# and 'unzip' for extracting ZIP files. The '-y' flag automatically answers "yes" to
-# any installation prompts, streamlining the process.
-sudo apt install curl php-zip unzip -y
-# Download the Composer installation script from getcomposer.org and execute it. This script downloads Composer and installs
-# it in the /usr/local/bin directory with the name 'composer'. After installation, the setup script is removed.
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-php -r "unlink('composer-setup.php');"
+# Reboots the system to apply any necessary updates.
+vagrant ssh "{{ slave_vm }}" -c "sudo systemctl reboot"
 
-# Configure Apache Virtual Host
-# The following code appends a VirtualHost configuration to the specified Apache site file.
-# It defines the server administrator's email, server name or IP address, document root,
-# directory options, and log file locations for Apache.
-sudo tee -a /etc/apache2/sites-available/{{ apache_virtual_host_name }} <<EOF
-<VirtualHost *:80>
-     ServerAdmin {{ server_admin_email }}
-     ServerName {{ server_name }}
-     DocumentRoot {{ document_root }}
+# Installs common utilities like lsb-release, ca-certificates, apt-transport-https, and software-properties-common.
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install lsb-release -y"
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install ca-certificates -y"
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install apt-transport-https -y"
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install software-properties-common -y"
 
-     <Directory {{ document_root }}>
-        Options Indexes Multiviews FollowSymlinks
-        AllowOverride All
-        Require all granted
-     </Directory>
+# Adds the Ondřej Surý PPA repository for PHP.
+vagrant ssh "{{ slave_vm }}" -c "echo | sudo add-apt-repository ppa:ondrej/php"
 
-     ErrorLog {{ apache_log_dir }}/error.log
-     CustomLog {{ apache_log_dir }}/access.log combined
- </VirtualHost>
-EOF
+# Updates the package list again to include packages from the newly added repository.
+vagrant ssh "{{ slave_vm }}" -c "sudo apt update"
 
-# Enable Apache Rewrite Module and Virtual Host Configuration.
-# Activate the Apache rewrite module to enable URL rewriting, which is often used by web applications.
-sudo a2enmod rewrite              
-# Enable the Apache virtual host configuration for your web application.
-# This makes the web application accessible through the specified server name or IP address.                  
-sudo a2ensite {{ apache_virtual_host_name }}  
-# Disable the default Apache virtual host (usually named '000-default') if it's enabled.
-# This step ensures that your web application's virtual host takes precedence.     
-sudo a2dissite 000-default   
-# Restart Apache to apply changes.                       
-sudo systemctl restart apache2                     
+# Installs PHP version 8.1 along with related modules:
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install php8.1 -y"
+#  - libapache2-mod-php: Apache PHP module for web server integration.
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install php libapache2-mod-php -y"
+#  - php-cli: PHP Command Line Interface (CLI) for executing PHP scripts from the command line.
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install php-cli -y"
+#  - php-cgi: PHP CGI for running PHP scripts independently of Apache.
+vagrant ssh "{{ slave_vm }}" -c "udo apt install php-cgi -y"
+#  - php-mysql: PHP support for MySQL databases.
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install php-mysql -y"
 
-# Installing Laravel
-# Create the directory that will hold the Laravel application files.
-sudo mkdir {{ laravel_app_directory }} 
-# Change the working directory to the newly created Laravel directory.
-cd {{ laravel_app_directory }}   
-# Set ownership and permissions for the Laravel application directory.
-# This ensures the web server (e.g., Apache) can read and write to the Laravel files.            
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}   
+# Restart the Apache web server to apply any configuration changes.
+vagrant ssh "{{ slave_vm }}" -c "sudo systemctl restart apache2"
 
-# Clone and Set Up the Laravel Application
+# -- CONFIGURE PHP --
+# Update the package list for PHP configuration.
+vagrant ssh "{{ slave_vm }}" -c "sudo apt update"
+
+# Install necessary prerequisites for PHP configuration.
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install php-curl -y"
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install php-xml -y"
+vagrant ssh "{{ slave_vm }}" -c "sudo apt install php-zip -y"
+
+# -- CREATING THE LARAVEL APP DIRECTORY AND SETTING PERMISSIONS --
+# This code creates the directory to store the Laravel application files and
+# sets the necessary ownership and permissions for the directory. Proper
+# permissions are essential to ensure that the web server (e.g., Apache) can
+# read and write to the Laravel files.
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    # Create the directory.
+    sudo mkdir -p "{{ laravel_app_directory }}" 
+
+    # Set ownership and permissions.          
+    sudo chown -R "{{ laravel_owner }}:{{ laravel_owner_group }}" "{{ laravel_app_directory }}"
+    sudo chmod -R 755 "{{ laravel_app_directory }}"
+ENDSSH
+
+# -- CLONE AND SET UP THE LARAVEL APPLICATION --
 # Update system packages to ensure the availability of required tools.
-sudo apt update                                           
-# Install Git and Composer, essential for managing and deploying the Laravel application.
-sudo apt-get install git composer -y                      
-# Clone the Laravel application repository to the specified directory.
-sudo -u {{ laravel_owner }} git clone {{ laravel_app_repo }} {{ laravel_app_directory }}  
-# Set the appropriate ownership of the Laravel application directory for the web server.
-sudo chown -R $USER {{ laravel_app_directory }}     
-# Change the working directory to the Laravel application root.       
-cd {{ laravel_app_directory }}                             
-# Install application dependencies using Composer, excluding development dependencies.
-composer install --no-dev                                  
+vagrant ssh "{{ slave_vm }}" -c "sudo apt update"
+# Install Git, essential for managing and deploying the Laravel application.
+vagrant ssh "{{ slave_vm }}" -c "sudo apt-get install git -y"
 
-# Grant Apache User Ownership of Laravel Directory.
+# Clone the Laravel application repository and handle errors.
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    set -e
+    sudo git clone "{{ laravel_app_repo }}" "{{ laravel_app_directory }}"
+ENDSSH
+
+# -- GRANT APACHE USER OWNERSHIP OF LARAVEL DIRECTORY --
 # Set the ownership and permissions of the Laravel application directory to ensure that the web server (e.g., Apache)
 # can read and write to specific subdirectories where application files and caches are stored.
-# Grant ownership to the Apache user and group for the Laravel application directory.
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}                   
-# Grant ownership to the Apache user and group for the 'storage' directory within the Laravel application.
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/storage/*         
-# Grant ownership to the Apache user and group for the 'bootstrap' directory within the Laravel application.
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/bootstrap/*       
-# Grant ownership to the Apache user and group for the 'bootstrap/cache' directory within the Laravel application.
-sudo chown -R {{ laravel_owner }}:{{ laravel_owner_group }} {{ laravel_app_directory }}/bootstrap/cache 
+vagrant ssh "{{ slave_vm }}" << ENDSSH    
+    # Grant ownership to the Apache user and group for the 'storage' directory within the Laravel application.
+    sudo chown -R "{{ laravel_owner }}:{{ laravel_owner_group }}" {{ laravel_app_directory }}/storage/* 
+    sudo chmod -R 775 "{{ laravel_app_directory }}/storage"
 
-# Update Laravel Environment Configuration and Generate Encryption Key.
-# Create or update the Laravel environment configuration file '.env' in the application directory.
-sudo touch {{ laravel_app_directory }}/.env       
-# Copy the template '.env.example' to '.env' to provide initial configuration settings.
-sudo cp {{ laravel_app_directory }}/.env.example {{ laravel_app_directory }}/.env       
-# Generate a secure encryption key for the Laravel application. This key is used for various security purposes.
-sudo php artisan key:generate                                                           
+    # Grant ownership to the Apache user and group for the 'bootstrap' directory within the Laravel application.
+    sudo chown -R "{{ laravel_owner }}:{{ laravel_owner_group }}" {{ laravel_app_directory }}/bootstrap/*
+    sudo chmod -R 775 "{{ laravel_app_directory }}/bootstrap"    
+    
+    # Grant ownership to the Apache user and group for the 'bootstrap/cache' directory within the Laravel application.
+    sudo chown -R "{{ laravel_owner }}:{{ laravel_owner_group }}" {{ laravel_app_directory }}/bootstrap/cache 
+    sudo chmod -R 775 "{{ laravel_app_directory }}/bootstrap/cache"
+ENDSSH
 
-# Update Environmental Variables in the Laravel .env Configuration.
-# Replace the 'DB_DATABASE' value in the Laravel configuration with the provided database name.
-sudo sed -i 's/DB_DATABASE={{ db_name }}/DB_DATABASE={{ db_name_placeholder }}/' {{ laravel_app_directory }}/.env          
-# Replace the 'DB_PASSWORD' value in the Laravel configuration with the provided database password.
-sudo sed -i 's/DB_PASSWORD={{ db_password }}/DB_PASSWORD={{ db_password_placeholder }}/' {{ laravel_app_directory }}/.env   
-# Replace the 'DB_USERNAME' value in the Laravel configuration with the provided database username.
-sudo sed -i 's/DB_USERNAME={{ db_user }}/DB_USERNAME={{ db_user_placeholder }}/' {{ laravel_app_directory }}/.env         
+# -- INSTALL LARAVEL APPLICATION DEPENDENCIES --
+# Download the Composer installation script from getcomposer.org and execute it. 
+# This script downloads Composer and installs it in the /usr/local/bin directory with the name 'composer'. 
+# After installation, the setup script is removed.
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    php -r "unlink('composer-setup.php');"
+ENDSSH
 
-# Start the MySQL Database Service.
-# This command starts the MySQL database service, making it operational and ready to accept database connections.
-sudo systemctl start mysql
-# Configure MySQL Database and Create a Database
-# The following block of code executes MySQL queries to configure the database:
-# - Sets up a function to execute MySQL queries using the provided username and password.
-# - Creates a function to create a database if it doesn't exist.
-# - Grants privileges for creating databases to the specified user.
-# - Finally, it creates a specific database if it doesn't already exist and starts the MySQL service.
-sudo mysql -u root <<EOF
-DB_USERNAME="{{ db_user_placeholder }}"
-DB_PASSWORD="{{ db_password_placeholder }}"
+# Change the working directory to the laravel application root and install application dependencies
+# using Composer, excluding development dependencies.
+vagrant ssh "{{ slave_vm }}" << ENDSSH  
+    # If the change fails, exit the script.     
+    cd "{{ laravel_app_directory }}" || exit    
 
-execute_query() {
-    local query="\$1"
-    local database="\$2"
-    mysql -u "\$DB_USERNAME" -p"\$DB_PASSWORD" "\$database" -e "\$query"
-}
+    # The '-d memory_limit=-1' flag sets an unlimited memory limit for Composer.
+    # The '--no-dev' option excludes development dependencies.                      
+    php -d memory_limit=-1 /usr/local/bin/composer install --no-dev                              
+ENDSSH
 
-# Function to create a database.
-create_database() {
-    local database="\$1"
-    execute_query "CREATE DATABASE IF NOT EXISTS \$database"
-}
+# -- UPDATE LARAVEL ENVIRONMENT CONFIGURATION AND GENERATE ENCRYPTION KEY --
+# In this section, the code performs various tasks related to the Laravel environment configuration.
+# This includes creating the Laravel environment configuration file '.env',
+# setting file permissions and ownership, copying the template '.env.example' to '.env',
+# changing the working directory to the Laravel application root, and generating an encryption key.
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    # Create the Laravel environment configuration file '.env' in the application directory.
+    sudo touch {{ laravel_app_directory }}/.env       
 
-# Grant privileges for creating databases.
-execute_query "GRANT CREATE DATABASE ON *.* TO '\$DB_USERNAME'@'localhost';" "mysql"
+    # Set file permissions for '.env'.
+    sudo chmod 600 /{{ laravel_app_directory }}/.env   
 
-# Create a database.
-create_database "{{ db_name_placeholder }}"
-# Start MySQL service
-sudo systemctl start mysql
+    # Set ownership for '.env'
+    sudo chown -R "{{ laravel_owner }}:{{ laravel_owner_group }}" {{ laravel_app_directory }}/.env   
+    
+    # Copy the template '.env.example' to '.env' to provide initial configuration settings.
+    sudo cp {{ laravel_app_directory }}/.env.example {{ laravel_app_directory }}/.env                                                                
+ENDSSH
+
+# Change the working directory to the Laravel application root, and generate a secure 
+# encryption key for the Laravel application.
+vagrant ssh "{{ slave_vm }}" -c "cd {{ laravel_app_directory }} && sudo php artisan key:generate"
+
+# -- CREATE A NEW MYSQL DATABASE AND USER -- 
+# MySQL commands to create a new database, user, and grant privileges.
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    mysql -u root -p -e "CREATE DATABASE {{ project_name }};"
+    mysql -u root -p -e "CREATE USER '{{ project_name }}'@'localhost' IDENTIFIED BY '{{ db_password }}';"
+    mysql -u root -p -e "GRANT ALL PRIVILEGES ON {{ project_name }}.* TO '{{ project_name }}'@'localhost';"
+ENDSSH
+
+# -- UPDATE ENVIRONMENTAL VARIABLES IN THE LARAVEL .ENV CONFIGURATION --
+# This section updates the environmental variables in the Laravel configuration file '.env'.
+# It replaces the 'DB_DATABASE' value with the provided database name,
+# 'DB_PASSWORD' with the provided database password, and 'DB_USERNAME' with the provided database username.
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    # Replace the 'DB_DATABASE' value in the Laravel configuration with the provided database name.
+    sudo sed -i "s/DB_DATABASE=.*$/DB_DATABASE={{ db_name }}/" {{ laravel_app_directory }}/.env
+
+    # Replace the 'DB_PASSWORD' value in the Laravel configuration with the provided database password.
+    sudo sed -i "s/DB_PASSWORD=.*$/DB_PASSWORD={{ db_password }}/" {{ laravel_app_directory }}/.env
+
+    # Replace the 'DB_USERNAME' value in the Laravel configuration with the provided database username.
+    sudo sed -i "s/DB_USERNAME=.*$/DB_USERNAME={{ db_user }}/" {{ laravel_app_directory }}/.env
+ENDSSH
+
+# -- CONFIGURE APACHE VIRTUAL HOST --
+# This code configures an Apache VirtualHost, including creating the necessary directory structure,
+# specifying server settings, directory options, and log file locations for Apache. The VirtualHost
+# configuration allows the web server to host a specified site with customized settings.
+
+# Append a VirtualHost configuration to the Apache site file using a here document.
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    sudo tee -a "{{ apache_virtual_host_location }}"/"{{ apache_virtual_host_name }}" <<EOF
+    <VirtualHost *:80>
+        ServerAdmin {{ server_admin_email }}
+        DocumentRoot {{ document_root }}
+        ServerName {{ server_name }}
+
+    <Directory {{ document_root }}>
+        Options Indexes FollowSymlinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog {{ apache_log_dir }}/error.log
+    CustomLog {{ apache_log_dir }}/access.log combined
+    </VirtualHost>
 EOF
+ENDSSH
 
-# Cache Laravel Configurations, Migrate Database, and Restart Apache
-# The following steps are executed to finalize the setup:
-# Cache Laravel configurations to improve performance.
-php artisan config:cache
-# Migrate the database to apply any pending migrations.
-php artisan migrate
-# Restart the Apache web server to apply the changes.
-sudo systemctl restart apache2
+# -- APPEND PROJECT ENTRY TO /etc/hosts FILE --
+# This code appends an entry to the /etc/hosts file, which maps a hostname (e.g., $project_name.local) 
+# to an IP address (e.g., $localhost). 
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    echo "{{ ip_address }} {{ project_name }}.local" | sudo tee -a /etc/hosts
+ENDSSH
+
+# -- ENABLE APACHE REWRITE MODULE AND CONFIGURE VIRTUAL HOST --
+# This code performs several tasks related to configuring the Apache web server:
+# - Activates the Apache rewrite module, essential for URL rewriting often used by web applications.
+# - Enables the 'master' virtual host configuration for the Laravel application.
+# - Disables the default Apache virtual host (usually named '000-default') to prioritize your web application's virtual host.
+# - Restarts the Apache service to apply the new configuration settings.
+
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    # - Activate the Apache rewrite module.
+    sudo a2enmod rewrite
+
+    # - Enable the 'project_name' virtual host configuration.
+    sudo a2ensite {{ project_name }}.conf
+
+    # - Disable the default Apache virtual host (usually named '000-default') if it's enabled.
+    sudo a2dissite 000-default
+
+    # - Restarts the Apache service.
+    sudo systemctl restart apache2
+ENDSSH
+
+# -- CACHE LARAVEL CONFIGURATIONS, MIGRATE DATABASE, AND RESTART APACHE --
+# In this section, the code performs final setup tasks for the Laravel application.
+# It includes:
+# - Caching the Laravel configurations to enhance performance. 
+# - Migrating the database to apply any pending migrations.
+# - Restarting the Apache web server to ensure the changes take effect.
+vagrant ssh "{{ slave_vm }}" << ENDSSH
+    # Change to the Laravel project directory.
+    cd "{{ laravel_app_directory }}" || exit
+
+    # Cache Laravel configurations to improve performance.
+    php artisan config:cache
+    
+    # Migrate the database to apply any pending migrations.
+    php artisan migrate
+    
+    # Restart the Apache web server to apply the changes.
+    sudo systemctl restart apache2
+ENDSSH
