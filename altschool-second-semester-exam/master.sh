@@ -200,11 +200,10 @@ ENDSSH
 vagrant ssh "$master_vm" -c "cd $laravel_app_directory && sudo php artisan key:generate"
 
 # -- CREATE A NEW MYSQL DATABASE AND USER -- 
-# MySQL commands to create a new database, user, and grant privileges.
+# MySQL commands to create a new database and user.
 vagrant ssh "$master_vm" << ENDSSH
     mysql -u root -p -e "CREATE DATABASE $project_name;"
     mysql -u root -p -e "CREATE USER '$project_name'@'localhost' IDENTIFIED BY '$db_password';"
-    mysql -u root -p -e "GRANT ALL PRIVILEGES ON $project_name.* TO '$project_name'@'localhost';"
 ENDSSH
 
 # -- UPDATE ENVIRONMENTAL VARIABLES IN THE LARAVEL .ENV CONFIGURATION --
