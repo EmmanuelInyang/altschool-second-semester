@@ -17,7 +17,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
       ```bash
          cd altschool-second-semester-exam
       
-4. **Create a Bash script file:**
+4. **Create a Bash script file (master-slave-setup.sh):**
    - I proceeded to create a Bash script file using the following command:
       ```bash
          touch master-slave-setup.sh
@@ -27,31 +27,40 @@ Here are the steps to run this script in an Ubuntu-based environment:
       ```bash
          chmod +x master-slave-setup.sh
 
-6. **Execute the master-slave-setup script:**
+6. **Write out the contents of master-slave-setup.sh**
+   - This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning.
+       
+7. **Execute the master-slave-setup script:**
    - Next, I executed the script with the command:
      ```bash
         sh master-slave-setup.sh
+   <br>
+   
+**After installing the master-slave-ubuntu.sh script, the next step I took was creating a script to automate the installation of LAMP stack on the master node (VM).**
+8. **Creating a Bash script file (master.sh)**
+   - I ran the command on the terminal to create the Bash script file:
+     ```bash
+        sh master.sh
 
-   - #### master-slave-setup.sh
-     This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning.
-<br>
+9. **Grant the necessary permission**
+    - The necessary permission was granted by running the command below to make the Bash script file and executable file.
+      ```bash
+         chmod +x master-slave-setup.sh
 
-**After installing the master-slave-ubuntu.sh script, the next step I took was executing the master.sh script to install Lamp stack on the master node (VM).**
-
-7. **Execute the master.sh script:**
+10. **Write out the contents of master.sh**
+    - This bash automates the deployment of a Laravel web application on the master virtual machine.
+      
+11. **Execute the master.sh script:**
    - To execute the master.sh script, I used the command:
       ```bash
          sh master.sh
-
-   - #### master.sh
-     This bash automates the deployment of a Laravel web application on the master virtual machine. It provides a detailed sequence of           steps for configuring the Laravel application, the Apache web server, and the associated database.
 <br>
 
 **After the master.sh script completion, the Lamp stack installation on the master node was successful, and the Laravel GitHub repository was cloned without issues. The subsequent step involved testing the Laravel application.**
 
 8. **Testing the Laravel Application on the Master node:**
-   - Access the master node via SSH using the command: vagrant ssh master.
-   - Retrieve the master node's IP address by executing hostname -I within the terminal. The second IP displayed is the correct one to use.
+   - Access the master node via SSH using the command: `vagrant ssh master`.
+   - Retrieve the master node's IP address by executing `hostname -I` within the terminal. The second IP displayed is the correct one to         use.
    - Open your web browser and enter this IP address.
    - You will be directed to the Laravel application's homepage.
      <br>
