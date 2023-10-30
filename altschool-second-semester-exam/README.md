@@ -55,4 +55,5 @@ Here are the steps to run this script in an Ubuntu-based environment:
    - Open your web browser and enter this IP address.
    - You will be directed to the Laravel application's homepage.
      <br>
+     <br>
      Below is a screenshot of the homepage displayed in my browser. 
