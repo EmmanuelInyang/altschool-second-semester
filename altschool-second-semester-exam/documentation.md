@@ -1,3 +1,17 @@
+# USAGE
+Here are the steps to run this script in an Ubuntu-based environment:
+
+1. **Open your terminal or code editor**
+2. **Create a directory**
+   Make a directory with the name of your choice. In this project, I used "altschool-second-semester-exam".
+   Run the following command to create the directory:
+   
+   ```bash
+   mkdir altschool-second-semester-exam
+
+
+
+
 ### master-slave-setup.sh
 
 This script automates the setup of Vagrant virtual machines and configures them for Ansible provisioning. It covers the following steps:
