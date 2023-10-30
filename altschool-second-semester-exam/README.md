@@ -25,7 +25,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
 5. **Grant the necessary permission:**
    - For the Bash script to be executable, I granted the required permission using the command:
       ```bash
-            chmod +x master-slave-setup.sh
+         chmod +x master-slave-setup.sh
 
 6. **Execute the master-slave-setup script:**
    - Next, I executed the script with the command:
