@@ -25,7 +25,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
 5. **Grant the necessary permission:**
    - For the Bash script to be executable, I granted the required permissions using the command:
       ```bash
-         chmod +x altschool-second-semester-exam
+         chmod +x master-slave-setup.sh
 
 6. **Execute the master-slave-setup script:**
    - Finally, I executed the script with the command:
