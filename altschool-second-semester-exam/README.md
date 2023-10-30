@@ -36,7 +36,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
      This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning.
 <br>
 
-**After installing the master-slave-ubuntu.sh script, the next step is to run the master.sh script to install Lamp stack on the master node (VM).**
+**After installing the master-slave-ubuntu.sh script, the next step I took was executing the master.sh script to install Lamp stack on the master node (VM).**
 
 7. **Execute the master.sh script:**
    - To execute the master.sh script, I used the command:
@@ -46,4 +46,4 @@ Here are the steps to run this script in an Ubuntu-based environment:
    - #### master.sh
      This bash automates the deployment of a Laravel web application on the master virtual machine. It provides a detailed sequence of           steps for configuring the Laravel application, the Apache web server, and the associated database.
 
-8. ****
+****
