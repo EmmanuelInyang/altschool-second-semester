@@ -24,7 +24,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
       ```bash
          chmod +x altschool-second-semester-exam
 
-6. **Execute this script:**
+6. **Execute the script:**
    - Finally, I executed the script with the command:
       ```bash
          sh master-slave-setup.sh
