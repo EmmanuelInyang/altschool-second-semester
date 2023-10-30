@@ -1,4 +1,4 @@
-<h1>Cloud Engineering Second Semester Examination Project (Deploy LAMP Stack)</h1>
+<h2>Cloud Engineering Second Semester Examination Project (Deploy LAMP Stack)</h2>
 
 <h2>STEPS</h2>
 
