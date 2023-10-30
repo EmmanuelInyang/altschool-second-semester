@@ -3,6 +3,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
 
 1. **Get Started:** <br>
    I opened my code editor terminal.
+   <br>
 3. **Create a directory:** <br>
    I decided to name the directory "altschool-second-semester-exam" and created it using the following command:
    ```bash
