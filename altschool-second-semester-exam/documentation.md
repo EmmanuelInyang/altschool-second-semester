@@ -5,11 +5,10 @@ Here are the steps to run this script in an Ubuntu-based environment:
    - I opened my code editor terminal.
      
 3. **Create a directory:** <br>
-   I decided to name the directory "altschool-second-semester-exam" and created it using the following command:
+   - I decided to name the directory "altschool-second-semester-exam" and created it using the following command:
    ```bash
    mkdir altschool-second-semester-exam
-<br>
-<br>
+
 4. **Navigate into the directory:**
    I changed my working directory to the newly created "altschool-second-semester-exam" directory:
    ```bash
