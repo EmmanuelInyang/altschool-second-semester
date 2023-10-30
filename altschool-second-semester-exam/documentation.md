@@ -1,4 +1,4 @@
-# USAGE
+# MY STEPS
 Here are the steps to run this script in an Ubuntu-based environment:
 
 1. **Get Started:** 
