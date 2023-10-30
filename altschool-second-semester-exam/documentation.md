@@ -19,8 +19,8 @@ Here are the steps to run this script in an Ubuntu-based environment:
    setup.sh" using this command:
    ```bash
       touch master-slave-setup.sh
-
-   then granted execution permissions to the script using:  
+   ***ffffff***
+then granted execution permissions to the script using:  
    
 
 
