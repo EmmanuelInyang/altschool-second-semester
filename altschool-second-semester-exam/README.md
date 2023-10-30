@@ -36,7 +36,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
      This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning.
 <br>
 
-**After installing the master-slave-ubuntu.sh script, the next step is to run the master.sh script to install Lamp stack one the master node (VM).**
+**After installing the master-slave-ubuntu.sh script, the next step is to run the master.sh script to install Lamp stack on the master node (VM).**
 
 7. **Execute the master.sh script:**
    - To execute the master.sh script, I used the command:
