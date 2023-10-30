@@ -1,4 +1,4 @@
-# Vagrant and Ansible Setup Script
+## Vagrant and Ansible Setup Script
 
 This script automates the setup of Vagrant virtual machines and configures them for Ansible provisioning. It covers the following steps:
 
