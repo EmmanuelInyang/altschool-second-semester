@@ -1,14 +1,14 @@
-##Cloud Engineering Second Semester Examination Project (Deploy LAMP Stack)
+<h2>Cloud Engineering Second Semester Examination Project (Deploy LAMP Stack)</h2>
 
 <h2>Steps</h2>
 
-Here are the steps to run this script in an Ubuntu-based environment:
+Here are the steps I followed to complete the AltSchool Second Semester exam in an Ubuntu-based environment:
 
 1. **Get Started:** 
-   - To begin, I opened my code editor terminal.
+   - To begin, I opened my code editor's terminal.
      
-2. **Create a directory:** <br>
-   - I chose to name the directory "altschool-second-semester-exam" and initiated it using the following command:
+2. **Create a directory:**
+   - I chose to name the directory 'altschool-second-semester-exam' and initiated it using the following command:
       ```bash
          mkdir altschool-second-semester-exam
 
