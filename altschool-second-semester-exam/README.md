@@ -92,6 +92,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          ```bash
             cd plays
          ```
+      <br>
    **NOTE:** It's worth noting that during the setup process using the 'master.sh' script, Ansible was installed, and essential components like the 'altschool' user, the 'myhosts'        file (also known as the Inventory file), and 'ansible.cfg' (Ansible configuration file) were configured.
 
 15. **Create a Jinja2 template file (slave.sh.j2)**
