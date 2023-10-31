@@ -59,13 +59,13 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
 **After the completion of the 'master.sh' script, the LAMP stack installation on the master VM was successful, and the Laravel GitHub repository was cloned without issues. The next step involved testing the Laravel application.**
    <br>
    <br>
-12. **Test the Laravel Application on the Master VM:** 
-   <ul>
-      <li> Access the master VM via SSH using the command: `vagrant ssh master`. </li>
-      <li> Retrieve the master VM's IP address by executing `hostname -I` within the terminal. The second IP displayed is the correct one to use. </li>
-      <li> Open your web browser and enter this IP address. </li>
-      <li> You will be directed to the Laravel application's homepage. </li>
-   </ul>
+ 12. **Test the Laravel Application on the Master VM:** 
+      <ul>
+         <li> Access the master VM via SSH using the command: `vagrant ssh master`. </li>
+         <li> Retrieve the master VM's IP address by executing `hostname -I` within the terminal. The second IP displayed is the correct one to use. </li>
+         <li> Open your web browser and enter this IP address. </li>
+         <li> You will be directed to the Laravel application's homepage. </li>
+      </ul>
    
    **Below is a screenshot of the homepage displayed in my browser:**
    ![master_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/e0999b82-451e-4bbd-b5a5-83d3a77fdea4)
