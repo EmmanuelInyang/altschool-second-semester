@@ -117,7 +117,8 @@ The primary difference between the master LAMP stack installation and the Slave 
 20. **Testing the Ansible playbook (ansible-playbook.yml)and the jinja template (slave.sh.j2)**
     - To ensure the successful execution of the tasks, I performed testing. Using the IP address obtained from the slave node by logging into the slave node and running the
       `hostname -I` command, I accessed the Laravel homepage by entering the slave's IP address in the web browser.
-      Below, you'll find a screenshot of the Laravel homepage with the slave VM's IP address:
+    
+      **Below, you'll find a screenshot of the Laravel homepage with the slave VM's IP address:**
       ![slave_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/2841ff30-1ad7-4a43-926e-edc0215f1ac6)
 
 
