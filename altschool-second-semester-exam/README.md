@@ -41,7 +41,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
 8. **Create a Bash script file (master.sh)**
    - I ran the command on the terminal to create the Bash script file:
      ```bash
-        sh master.sh
+        touch master.sh
      ```
 9. **Grant the necessary permission (master.sh)**
     - The necessary permission was granted by running the command below to make the Bash script file an executable file.
@@ -96,7 +96,10 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
 
 15. **Create a Jinja2 template file (slave.sh.j2)**
     - In the 'plays' directory, I created a Jinja template file named 'slave.sh.j2.' Jinja templates are used to make Ansible plays involving bash scripts as dynamic as possible.
-
+      To create the Jinja template file, I used the following command:
+      ```bash
+            touch slave.sh.j2
+         ```
 16. **Grant the necessary permission (slave.sh.j2)**
     - I executed the following command to make the 'slave.sh.j2' file executable.
          ```bash
@@ -109,7 +112,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
     - In the 'plays' directory, I created an Ansible playbook file named 'ansible-playbook.yml.' In this file, I defined the Ansible play for the LAMP stack installation using the           'slave.sh.j2' file and added another specified play. This additional play involved creating a cron job on the slave node to run at midnight (12 AM).
       To create the file, I used the command:
          ```bash
-            mkdir ansible-playbook.yml
+            touch ansible-playbook.yml
          ```
 19. **Grant the necessary permission (ansible-playbook.yml)**
     - To make the 'ansible-playbook.yml' file executable, I ran the command:
