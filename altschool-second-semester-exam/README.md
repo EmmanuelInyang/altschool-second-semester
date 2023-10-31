@@ -36,7 +36,8 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
         sh master-slave-setup.sh
      ```
 **After installing the master-slave-ubuntu.sh script, the next step I took was to create a script to automate the installation of the LAMP stack on the master VM.**
-<br>
+   <br>
+   <br>
 8. **Create a Bash script file (master.sh)**
    - I ran the command on the terminal to create the Bash script file:
      ```bash
@@ -58,7 +59,6 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
 **After the completion of the 'master.sh' script, the LAMP stack installation on the master VM was successful, and the Laravel GitHub repository was cloned without issues. The next step involved testing the Laravel application.**
    <br>
    <br>
-   
 12. **Test the Laravel Application on the Master VM:** <br>
 <ul>
    <li> Access the master VM via SSH using the command: `vagrant ssh master`. </li>
