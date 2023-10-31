@@ -67,7 +67,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
    <li> Open your web browser and enter this IP address. </li>
    <li> You will be directed to the Laravel application's homepage. </li>
 </ul>
-
+<br>
    **Below is a screenshot of the homepage displayed in my browser:**
      ![master_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/e0999b82-451e-4bbd-b5a5-83d3a77fdea4)
    
