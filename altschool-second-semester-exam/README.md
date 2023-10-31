@@ -92,8 +92,6 @@ The primary difference between the master LAMP stack installation and the Slave 
 15. **Create a Jinja2 template file**
     - In the 'plays' directory, I created a Jinja template file named 'slave.sh.j2.' Jinja templates are used to make Ansible plays involving bash scripts as dynamic as possible.
 
-16. ****
-
 16. **Write out the contents for slave.sh.j2**
     - This bash automates the deployment of a Laravel web application on the slave virtual machine.
 
