@@ -61,10 +61,10 @@ Here are the steps to run this script in an Ubuntu-based environment:
    <br>
 12. **Testing the Laravel Application on the Master node:** <br>
 <ul>
-    <li>  - Access the master node via SSH using the command: `vagrant ssh master`. </li>
-      - Retrieve the master node's IP address by executing `hostname -I` within the terminal. The second IP displayed is the correct one to use. <br>
-      - Open your web browser and enter this IP address.
-      - You will be directed to the Laravel application's homepage. <br>
+   <li> Access the master node via SSH using the command: `vagrant ssh master`. </li>
+   <li> Retrieve the master node's IP address by executing `hostname -I` within the terminal. The second IP displayed is the correct one to use. </li>
+   <li> Open your web browser and enter this IP address. </li>
+   <li> You will be directed to the Laravel application's homepage. </li>
 </ul>
    <br>
    <br>
