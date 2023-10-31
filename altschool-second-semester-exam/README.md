@@ -1,4 +1,4 @@
-<h2>Cloud Engineering Second Semester Examination Project (Deploy LAMP Stack)</h2>
+##Cloud Engineering Second Semester Examination Project (Deploy LAMP Stack)##
 
 <h2>Steps</h2>
 
@@ -110,7 +110,8 @@ The primary difference between the master LAMP stack installation and the Slave 
     - To execute the ansible-playbook.yml file, I used this command:
          ```bash
             ansible-playbook ansible-playbook,yml
-   **Note** The first ansible-playbook is the command, and the second one is the name of the ansible playbook to run.
+         ``` 
+       **Note** The first ansible-playbook is the command, and the second one is the name of the ansible playbook to run.
 
 20. **Testing the Ansible playbook (ansible-playbook.yml)and the jinja template (slave.sh.j2)**
     - To ensure the successful execution of the tasks, I performed testing. Using the IP address obtained from the slave node by logging into the slave node and running the
