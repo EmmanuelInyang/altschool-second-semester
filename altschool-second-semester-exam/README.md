@@ -77,6 +77,7 @@ The primary difference between the master LAMP stack installation and the Slave 
 
 **NOTE:** Ansible was installed and configured on the master node when the master.sh script was executed.
 <br>
+<br>
 12. **SSH into the Master node:**
     I checked if I'm already on the master node from the previous task. If i'm not, I can SSH into the master node with the command: 
       ```bash
