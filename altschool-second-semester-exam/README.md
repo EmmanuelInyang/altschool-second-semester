@@ -67,24 +67,26 @@ Here are the steps to run this script in an Ubuntu-based environment:
    <li> Open your web browser and enter this IP address. </li>
    <li> You will be directed to the Laravel application's homepage. </li>
 </ul>
-<br>
+
    **Below is a screenshot of the homepage displayed in my browser:**
      ![master_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/e0999b82-451e-4bbd-b5a5-83d3a77fdea4)
-   
+<br>  
+<br>
 **After successfully testing the Laravel Application on the master node, the next step I took was installing the same LAMP stack application on the slave node using Ansible.**
 The primary difference between the master LAMP stack installation and the Slave LAMP stack installation is the utilization of Ansible for the installation on the Slave node.
 
 **NOTE:** Ansible was installed and configured on the master node when the master.sh script was executed.
 
 12. **SSH into the Master node:**
-    I checked if i'm already on the master node from the previous task. If i'm not, I can SSH into the master node with the command: 
+    I checked if I'm already on the master node from the previous task. If i'm not, I can SSH into the master node with the command: 
       ```bash
          vagrant ssh master.
          
 14. **Locate the "plays" directory**
-    Once logged into the master node, I switched to the 'Altschool' user by using the following command:
+    Once logged into the master node, I switched to the 'altschool' user by using the following command:
        ```bash
-          su - Altschool.
-   A password prompt appeared, and I entered the password, which is 'password', as configured by the **master.sh** script. After successfully entering the password, I was logged in as     the 'Altschool' user on the master node. Next, I navigated to the 'plays' directory with the command: cd plays. 
+          su - altschool.
+   A password prompt appeared, and I entered the password, which is 'password', as configured by the **master.sh** script. After successfully entering the password, I was logged in as     the 'AltSchool' user on the master node. Next, I navigated to the 'plays' directory with the command: cd plays. 
+   
    **NOTE:** It's worth noting that during the setup process using the 'master.sh' script, Ansible was installed, and essential components like the 'Altschool' user, the 'myhosts' file    (also known as the Inventory file), and 'ansible.cfg' (Ansible configuration file) were configured.
     
