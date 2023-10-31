@@ -73,15 +73,17 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
 <br>
 **After successfully testing the Laravel Application on the master VM, the next step I took was installing the same LAMP stack application on the slave VM using Ansible.**
 
-**NOTE:** The main difference between the LAMP stack installation on the master and slave VMs is the use of Ansible for the installation on the slave VM. 
-Ansible was installed and configured on the master VM when the master.sh script was executed.
+**NOTE:** 
+   - The main difference between the LAMP stack installation on the master and slave VMs is the use of Ansible for the installation on the slave VM. 
+   - Ansible was installed and configured on the master VM when the master.sh script was executed.
 <br>
 <br>
 13. **SSH into the Master VM:**
     - I verified whether I was already on the master VM from the previous task. If I'm not, I could SSH into the master VM with the command: 
          ```bash
             vagrant ssh master
-         ``` 
+         ```
+     
 14. **Locate the "plays" directory**
     - Once logged into the master VM, I switched to the 'altschool' user by using the following command:
           ```bash
