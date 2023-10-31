@@ -26,7 +26,7 @@
     db_user: "{{ project_name }}" # - The username for connecting to the database.
 
     # Bash Script (Using Jinja2 Template).
-    bash_script_src: /home/altschool/play/slave.sh.j2
+    bash_script_src: /home/altschool/plays/slave.sh.j2
     bash_script_dest: /tmp/slave.sh
 
     # Test the PHP Application.
