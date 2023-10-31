@@ -13,10 +13,10 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          mkdir altschool-second-semester-exam
       ```
 3. **Navigate into the directory:**
-   - I then changed my working directory to the newly created "altschool-second-semester-exam" directory:
+   - I then changed my working directory to the newly created 'altschool-second-semester-exam' directory:
       ```bash
          cd altschool-second-semester-exam
-      
+      ```      
 4. **Create a Bash script file (master-slave-setup.sh):**
    - I proceeded to create a Bash script file using the following command:
       ```bash
