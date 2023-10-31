@@ -82,10 +82,18 @@ The primary difference between the master LAMP stack installation and the Slave 
       ```bash
          vagrant ssh master.
          
-14. **Locate the "plays" directory**
+13. **Locate the "plays" directory**
     Once logged into the master node, I switched to the 'altschool' user by using the following command:
        ```bash
           su - altschool.
    A password prompt appeared, and I entered the password, which is 'password', as configured by the **master.sh** script. After successfully entering the password, I was logged in as     the 'AltSchool' user on the master node. Next, I navigated to the 'plays' directory with the command: cd plays. <br>
    **NOTE:** It's worth noting that during the setup process using the 'master.sh' script, Ansible was installed, and essential components like the 'Altschool' user, the 'myhosts' file    (also known as the Inventory file), and 'ansible.cfg' (Ansible configuration file) were configured.
+
+14. **Creating a Jinja2 template file**
+    In the 'plays' directory, I created a Jinja template file named 'slave.sh.j2.' Jinja templates are used to make Ansible plays involving bash scripts as dynamic as possible.
+
+15. **Write out the contents for Jinja 2**
+    I wrote the necessary contents within this file.
+
+16. ****
     
