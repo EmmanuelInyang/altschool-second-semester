@@ -119,6 +119,9 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          ```bash
             chmod +x ansible-playbook.yml
          ```
+      This is the 'plays' directory after completing the steps.
+      ![inside the plays directory](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/90aa6da1-f3dc-4026-8628-b81e51cc4777)
+  
 20. **Execute the Ansible file (ansible-playbook.yml):**
     - To execute the 'ansible-playbook.yml' file, I used the command:
          ```bash
@@ -128,12 +131,14 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
 
 21. **Test the Ansible playbook (ansible-playbook.yml):**
     - To ensure the successful execution of the tasks, I performed testing.
-      Using the second IP address obtained from the slave VM by logging into the slave VM and running the
-      `hostname -I` command, I accessed the Laravel homepage by entering the slave's second IP address in the web browser.
-    
-**Below, you'll find a screenshot of the Laravel homepage with the slave VM's IP address:**
-![slave_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/2841ff30-1ad7-4a43-926e-edc0215f1ac6)
-
-
+      <ul>
+      <li> Using the second IP address obtained from the slave VM by logging into the slave VM and running the
+      `hostname -I` command, I accessed the Laravel homepage by entering the slave's second IP address in the web browser. </li>
+   
+   **Below, you'll find a screenshot of the Laravel homepage with the slave VM's IP address:**
+   ![slave_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/2841ff30-1ad7-4a43-926e-edc0215f1ac6)
+      
+      <li>The terminal screenshot shows successful Ansible plays.</li>
+      </ul>
 
       
