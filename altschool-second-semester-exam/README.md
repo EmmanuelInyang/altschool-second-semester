@@ -27,7 +27,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
       ```bash
          chmod +x master-slave-setup.sh
       ```
-6. **Write the contents of master-slave-setup.sh**
+6. **Write the contents of master-slave-setup.sh:**
    - This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning.
        
 7. **Execute the master-slave-setup.sh script:**
@@ -38,17 +38,17 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
 **After installing the master-slave-ubuntu.sh script, the next step I took was to create a script to automate the installation of the LAMP stack on the master VM.**
    <br>
    <br>
-8. **Create a Bash script file (master.sh)**
+8. **Create a Bash script file (master.sh):**
    - I ran the command on the terminal to create the Bash script file:
      ```bash
         touch master.sh
      ```
-9. **Grant the necessary permission (master.sh)**
+9. **Grant the necessary permission (master.sh):**
     - The necessary permission was granted by running the command below to make the Bash script file an executable file.
       ```bash
          chmod +x master.sh
       ```
-10. **Write the contents of master.sh**
+10. **Write the contents of master.sh:**
     - This script automates the installation and setup of the LAMP stack on the master virtual machine.
       
 11. **Execute the master.sh script:**
@@ -83,7 +83,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
             vagrant ssh master
          ```
      
-14. **Locate the "plays" directory**
+14. **Locate the "plays" directory:**
     - Once logged into the master VM, I switched to the 'altschool' user by using the following command:
           ```bash
              su - altschool
@@ -94,13 +94,13 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          ```
       **NOTE:** During the setup process using the 'master.sh' script, Ansible was installed, and essential components like the 'altschool' user, the 'myhosts' file (also known as the       Inventory file), and 'ansible.cfg' (Ansible configuration file) were configured.
 
-15. **Create a Jinja2 template file (slave.sh.j2)**
+15. **Create a Jinja2 template file (slave.sh.j2):**
     - In the 'plays' directory, I created a Jinja template file named 'slave.sh.j2.' Jinja templates are used to make Ansible plays involving bash scripts as dynamic as possible.
       To create the Jinja2 template file, I used the following command:
       ```bash
             touch slave.sh.j2
          ```
-16. **Grant the necessary permission (slave.sh.j2)**
+16. **Grant the necessary permission (slave.sh.j2):**
     - I executed the following command to make the 'slave.sh.j2' file executable.
          ```bash
             chmod +x slave.sh.j2
@@ -108,25 +108,25 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
 17. **Write the contents for slave.sh.j2**
     - This script automates the installation and setup of the LAMP stack on the slave virtual machine.
 
-18. **Create an Ansible playbook file (ansible-playbook.yml)**
+18. **Create an Ansible playbook file (ansible-playbook.yml):**
     - In the 'plays' directory, I created an Ansible playbook file named 'ansible-playbook.yml.' In this file, I defined the Ansible play for the LAMP stack installation using the           'slave.sh.j2' file and added another specified play. This additional play involved creating a cron job on the slave node to run at midnight (12 AM).
       To create the file, I used the command:
          ```bash
             touch ansible-playbook.yml
          ```
-19. **Grant the necessary permission (ansible-playbook.yml)**
+19. **Grant the necessary permission (ansible-playbook.yml):**
     - To make the 'ansible-playbook.yml' file executable, I ran the command:
          ```bash
             chmod +x ansible-playbook.yml
          ```
-20. **Execute the Ansible file (ansible-playbook.yml)**
+20. **Execute the Ansible file (ansible-playbook.yml):**
     - To execute the 'ansible-playbook.yml' file, I used the command:
          ```bash
             ansible-playbook ansible-playbook.yml
          ``` 
        **Note:** The first ansible-playbook is the command, and the second one is the name of the ansible playbook to run.
 
-21. **Test the Ansible playbook (ansible-playbook.yml)**
+21. **Test the Ansible playbook (ansible-playbook.yml):**
     - To ensure the successful execution of the tasks, I performed testing.
       Using the second IP address obtained from the slave VM by logging into the slave VM and running the
       `hostname -I` command, I accessed the Laravel homepage by entering the slave's second IP address in the web browser.
