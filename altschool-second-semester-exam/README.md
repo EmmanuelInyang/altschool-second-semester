@@ -76,7 +76,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
 The primary difference between the master LAMP stack installation and the Slave LAMP stack installation is the utilization of Ansible for the installation on the Slave node.
 
 **NOTE:** Ansible was installed and configured on the master node when the master.sh script was executed.
-
+<br>
 12. **SSH into the Master node:**
     I checked if I'm already on the master node from the previous task. If i'm not, I can SSH into the master node with the command: 
       ```bash
