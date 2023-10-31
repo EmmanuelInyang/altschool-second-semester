@@ -121,7 +121,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          ```bash
             ansible-playbook ansible-playbook.yml
          ``` 
-       **Note** The first ansible-playbook is the command, and the second one is the name of the ansible playbook to run.
+       **Note:** The first ansible-playbook is the command, and the second one is the name of the ansible playbook to run.
 
 21. **Test the Ansible playbook (ansible-playbook.yml)and the jinja template (slave.sh.j2)**
     - To ensure the successful execution of the tasks, I performed testing.
