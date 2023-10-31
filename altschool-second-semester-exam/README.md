@@ -83,7 +83,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          ```bash
             vagrant ssh master
          ```
-     
+     <br> 
 14. **Locate the "plays" directory**
     - Once logged into the master VM, I switched to the 'altschool' user by using the following command:
           ```bash
