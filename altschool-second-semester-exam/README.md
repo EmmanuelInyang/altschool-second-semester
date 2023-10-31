@@ -96,7 +96,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
 
 15. **Create a Jinja2 template file (slave.sh.j2)**
     - In the 'plays' directory, I created a Jinja template file named 'slave.sh.j2.' Jinja templates are used to make Ansible plays involving bash scripts as dynamic as possible.
-      To create the Jinja template file, I used the following command:
+      To create the Jinja2 template file, I used the following command:
       ```bash
             touch slave.sh.j2
          ```
