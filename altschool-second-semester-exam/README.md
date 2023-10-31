@@ -22,7 +22,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
       ```bash
          touch master-slave-setup.sh
       ```
-5. **Grant the necessary permission:**
+5. **Grant the necessary permission (master-slave-setup.sh):**
    - To make the Bash script executable, I granted the required permission using the command:
       ```bash
          chmod +x master-slave-setup.sh
@@ -35,35 +35,34 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
      ```bash
         sh master-slave-setup.sh
      ```
-**After installing the master-slave-ubuntu.sh script, the next step I took was creating a script to automate the installation of LAMP stack on the master node (VM).**
-   <br>
-   <br>
-8. **Creating a Bash script file (master.sh)**
+**After installing the master-slave-ubuntu.sh script, the next step I took was to create a script to automate the installation of the LAMP stack on the master VM.**
+<br>
+8. **Create a Bash script file (master.sh)**
    - I ran the command on the terminal to create the Bash script file:
      ```bash
         sh master.sh
-
+     ```
 9. **Grant the necessary permission (master.sh)**
-    - The necessary permission was granted by running the command below to make the Bash script file and executable file.
+    - The necessary permission was granted by running the command below to make the Bash script file an executable file.
       ```bash
          chmod +x master.sh
-
-10. **Write out the contents of master.sh**
-    - This bash automates the deployment of a Laravel web application on the master virtual machine.
+      ```
+10. **Write the contents of master.sh**
+    - This script automates the deployment of a Laravel web application on the master virtual machine.
       
 11. **Execute the master.sh script:**
-      - To execute the master.sh script, I used the command:
+      - To execute the 'master.sh' script, I used the following command:
          ```bash
             sh master.sh
-      
-**After the master.sh script completion, the Lamp stack installation on the master node was successful, and the Laravel GitHub repository was cloned without issues. The next step involved testing the Laravel application.**
+         ```
+**After the completion of the 'master.sh' script, the LAMP stack installation on the master VM was successful, and the Laravel GitHub repository was cloned without issues. The next step involved testing the Laravel application.**
    <br>
    <br>
    
-12. **Testing the Laravel Application on the Master node:** <br>
+12. **Test the Laravel Application on the Master VM:** <br>
 <ul>
-   <li> Access the master node via SSH using the command: `vagrant ssh master`. </li>
-   <li> Retrieve the master node's IP address by executing `hostname -I` within the terminal. The second IP displayed is the correct one to use. </li>
+   <li> Access the master VM via SSH using the command: `vagrant ssh master`. </li>
+   <li> Retrieve the master VM's IP address by executing `hostname -I` within the terminal. The second IP displayed is the correct one to use. </li>
    <li> Open your web browser and enter this IP address. </li>
    <li> You will be directed to the Laravel application's homepage. </li>
 </ul>
