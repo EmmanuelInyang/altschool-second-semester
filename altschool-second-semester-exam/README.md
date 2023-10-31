@@ -74,7 +74,6 @@ Here are the steps to run this script in an Ubuntu-based environment:
 <br>
 **After successfully testing the Laravel Application on the master node, the next step I took was installing the same LAMP stack application on the slave node using Ansible.**
 The primary difference between the master LAMP stack installation and the Slave LAMP stack installation is the utilization of Ansible for the installation on the Slave node.
-
 **NOTE:** Ansible was installed and configured on the master node when the master.sh script was executed.
 <br>
 <br>
@@ -88,6 +87,5 @@ The primary difference between the master LAMP stack installation and the Slave 
        ```bash
           su - altschool.
    A password prompt appeared, and I entered the password, which is 'password', as configured by the **master.sh** script. After successfully entering the password, I was logged in as     the 'AltSchool' user on the master node. Next, I navigated to the 'plays' directory with the command: cd plays. 
-   
    **NOTE:** It's worth noting that during the setup process using the 'master.sh' script, Ansible was installed, and essential components like the 'Altschool' user, the 'myhosts' file    (also known as the Inventory file), and 'ansible.cfg' (Ansible configuration file) were configured.
     
