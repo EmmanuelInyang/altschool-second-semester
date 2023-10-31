@@ -60,61 +60,66 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
    <br>
    <br>
 12. **Test the Laravel Application on the Master VM:** 
-   <ol>
+   <ul>
       <li> Access the master VM via SSH using the command: `vagrant ssh master`. </li>
       <li> Retrieve the master VM's IP address by executing `hostname -I` within the terminal. The second IP displayed is the correct one to use. </li>
       <li> Open your web browser and enter this IP address. </li>
       <li> You will be directed to the Laravel application's homepage. </li>
-   </ol>
+   </ul>
    
    **Below is a screenshot of the homepage displayed in my browser:**
    ![master_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/e0999b82-451e-4bbd-b5a5-83d3a77fdea4)
 <br>  
 <br>
-**After successfully testing the Laravel Application on the master node, the next step I took was installing the same LAMP stack application on the slave node using Ansible.**
-The primary difference between the master LAMP stack installation and the Slave LAMP stack installation is the utilization of Ansible for the installation on the Slave node. <br>
-**NOTE:** Ansible was installed and configured on the master node when the master.sh script was executed.
+**After successfully testing the Laravel Application on the master VM, the next step I took was installing the same LAMP stack application on the slave VM using Ansible.**
+The main difference between the LAMP stack installation on the master and slave VMs is the use of Ansible for the installation on the slave VM. <br>
+**NOTE:** Ansible was installed and configured on the master VM when the master.sh script was executed.
 <br>
 <br>
-13. **SSH into the Master node:**
-    - I checked if I'm already on the master node from the previous task. If i'm not, I can SSH into the master node with the command: 
-      ```bash
-         vagrant ssh master.
-         
+13. **SSH into the Master VM:**
+    - I verified whether I was already on the master VM from the previous task. If I'm not, I could SSH into the master VM with the command: 
+         ```bash
+            vagrant ssh master.
+         ``` 
 14. **Locate the "plays" directory**
-    - Once logged into the master node, I switched to the 'altschool' user by using the following command:
-       ```bash
-          su - altschool.
-   A password prompt appeared, and I entered the password, which is 'password', as configured by the **master.sh** script. After successfully entering the password, I was logged in as     the 'AltSchool' user on the master node. Next, I navigated to the 'plays' directory with the command: cd plays. <br>
-   **NOTE:** It's worth noting that during the setup process using the 'master.sh' script, Ansible was installed, and essential components like the 'Altschool' user, the 'myhosts'        file (also known as the Inventory file), and 'ansible.cfg' (Ansible configuration file) were configured.
+    - Once logged into the master VM, I switched to the 'altschool' user by using the following command:
+          ```bash
+             su - altschool.
+          ```
+      A password prompt appeared, and I entered the password 'password' as configured by the 'master.sh' script. After successfully entering the password, I logged in as the                 'altschool' user on the master VM. Next, I navigated to the 'plays' directory using the command:
+         ```bash
+            cd plays.
+         ```
+   **NOTE:** It's worth noting that during the setup process using the 'master.sh' script, Ansible was installed, and essential components like the 'altschool' user, the 'myhosts'        file (also known as the Inventory file), and 'ansible.cfg' (Ansible configuration file) were configured.
 
-15. **Create a Jinja2 template file**
+15. **Create a Jinja2 template file (slave.sh.j2)**
     - In the 'plays' directory, I created a Jinja template file named 'slave.sh.j2.' Jinja templates are used to make Ansible plays involving bash scripts as dynamic as possible.
 
-16. **Write out the contents for slave.sh.j2**
-    - This bash automates the deployment of a Laravel web application on the slave virtual machine.
+16. **Write the contents for slave.sh.j2**
+    - This script automates the deployment of a Laravel web application on the slave virtual machine.
 
 17. **Create an Ansible playbook file (ansible-playbook.yml)**
-    - Within the 'plays' directory, I also created an Ansible playbook file named 'ansible-playbook.yml.' In this file, I defined the Ansible play required to perform the LAMP stack         installation using the 'slave.sh.j2' file and other required tasks. The other tasks involved creating a cron job on the slave node to run at midnight (12AM).
-      To create the file, I ran the command:
+    - In the 'plays' directory, I created an Ansible playbook file named 'ansible-playbook.yml.' In this file, I defined the Ansible play for the LAMP stack installation using the           'slave.sh.j2' file and added another specified play. This additional play involved creating a cron job on the slave node to run at midnight (12 AM).
+      To create the file, I used the command:
          ```bash
             mkdir ansible-playbook.yml
-
+         ```
 18. **Grant the necessary permission (ansible-playbook.yml)**
-    - In order for the ansible-playbook.yml file to be an executable, I ran the command:
+    - To make the 'ansible-playbook.yml' file executable, I ran the command:
          ```bash
-            chmod +x master.sh
-
+            chmod +x ansible-playbook.yml
+         ```
 19. **Execute the Ansible file (ansible-playbook.yml)**
-    - To execute the ansible-playbook.yml file, I used this command:
+    - To execute the 'ansible-playbook.yml' file, I used the command:
          ```bash
             ansible-playbook ansible-playbook,yml
          ``` 
        **Note** The first ansible-playbook is the command, and the second one is the name of the ansible playbook to run.
 
-20. **Testing the Ansible playbook (ansible-playbook.yml)and the jinja template (slave.sh.j2)**
-    - To ensure the successful execution of the tasks, I performed testing. Using the IP address obtained from the slave node by logging into the slave node and running the
-      `hostname -I` command, I accessed the Laravel homepage by entering the slave's IP address in the web browser.
+20. **Test the Ansible playbook (ansible-playbook.yml)and the jinja template (slave.sh.j2)**
+    - To ensure the successful execution of the tasks, I performed testing.
+      Using the second IP address obtained from the slave VM by logging into the slave VM and running the
+      `hostname -I` command, I accessed the Laravel homepage by entering the slave's second IP address in the web browser.
     
 **Below, you'll find a screenshot of the Laravel homepage with the slave VM's IP address:**
 ![slave_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/2841ff30-1ad7-4a43-926e-edc0215f1ac6)
