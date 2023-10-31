@@ -126,7 +126,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          ``` 
        **Note:** The first ansible-playbook is the command, and the second one is the name of the ansible playbook to run.
 
-21. **Test the Ansible playbook (ansible-playbook.yml)and the jinja template (slave.sh.j2)**
+21. **Test the Ansible playbook (ansible-playbook.yml)**
     - To ensure the successful execution of the tasks, I performed testing.
       Using the second IP address obtained from the slave VM by logging into the slave VM and running the
       `hostname -I` command, I accessed the Laravel homepage by entering the slave's second IP address in the web browser.
