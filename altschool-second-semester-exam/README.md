@@ -18,23 +18,23 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          cd altschool-second-semester-exam
       ```      
 4. **Create a Bash script file (master-slave-setup.sh):**
-   - I proceeded to create a Bash script file using the following command:
+   - I proceeded to create a Bash script file named 'master-slave-setup.sh' using the following command:
       ```bash
          touch master-slave-setup.sh
-
+      ```
 5. **Grant the necessary permission:**
-   - For the Bash script to be executable, I granted the required permission using the command:
+   - To make the Bash script executable, I granted the required permission using the command:
       ```bash
          chmod +x master-slave-setup.sh
-
-6. **Write out the contents of master-slave-setup.sh**
+      ```
+6. **Write the contents of master-slave-setup.sh**
    - This script automates the setup of two Vagrant virtual machines (master and slave) and configures them for Ansible provisioning.
        
-7. **Execute the master-slave-setup script:**
-   - Next, I executed the script with the command:
+7. **Execute the master-slave-setup.sh script:**
+   - Next, I executed the script using the command:
      ```bash
         sh master-slave-setup.sh
-
+     ```
 **After installing the master-slave-ubuntu.sh script, the next step I took was creating a script to automate the installation of LAMP stack on the master node (VM).**
    <br>
    <br>
