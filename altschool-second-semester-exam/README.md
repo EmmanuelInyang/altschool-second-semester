@@ -11,7 +11,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
    - I chose to name the directory 'altschool-second-semester-exam' and initiated it using the following command:
       ```bash
          mkdir altschool-second-semester-exam
-
+      ```
 3. **Navigate into the directory:**
    - I then changed my working directory to the newly created "altschool-second-semester-exam" directory:
       ```bash
