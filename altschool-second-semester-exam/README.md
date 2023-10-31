@@ -69,7 +69,7 @@ Here are the steps to run this script in an Ubuntu-based environment:
 </ul>
 
    **Below is a screenshot of the homepage displayed in my browser:**
-     ![master_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/e0999b82-451e-4bbd-b5a5-83d3a77fdea4)
+   ![master_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/e0999b82-451e-4bbd-b5a5-83d3a77fdea4)
 <br>  
 <br>
 **After successfully testing the Laravel Application on the master node, the next step I took was installing the same LAMP stack application on the slave node using Ansible.**
@@ -87,7 +87,7 @@ The primary difference between the master LAMP stack installation and the Slave 
        ```bash
           su - altschool.
    A password prompt appeared, and I entered the password, which is 'password', as configured by the **master.sh** script. After successfully entering the password, I was logged in as     the 'AltSchool' user on the master node. Next, I navigated to the 'plays' directory with the command: cd plays. <br>
-   **NOTE:** It's worth noting that during the setup process using the 'master.sh' script, Ansible was installed, and essential components like the 'Altschool' user, the 'myhosts'          file (also known as the Inventory file), and 'ansible.cfg' (Ansible configuration file) were configured.
+   **NOTE:** It's worth noting that during the setup process using the 'master.sh' script, Ansible was installed, and essential components like the 'Altschool' user, the 'myhosts'        file (also known as the Inventory file), and 'ansible.cfg' (Ansible configuration file) were configured.
 
 15. **Create a Jinja2 template file**
     - In the 'plays' directory, I created a Jinja template file named 'slave.sh.j2.' Jinja templates are used to make Ansible plays involving bash scripts as dynamic as possible.
@@ -112,14 +112,14 @@ The primary difference between the master LAMP stack installation and the Slave 
     - To execute the ansible-playbook.yml file, I used this command:
          ```bash
             ansible-playbook ansible-playbook,yml
-      The first ansible-playbook is the command, and the second one is the name of the ansible playbook to run.
+   **Note** The first ansible-playbook is the command, and the second one is the name of the ansible playbook to run.
 
 20. **Testing the Ansible playbook (ansible-playbook.yml)and the jinja template (slave.sh.j2)**
     - To ensure the successful execution of the tasks, I performed testing. Using the IP address obtained from the slave node by logging into the slave node and running the
       `hostname -I` command, I accessed the Laravel homepage by entering the slave's IP address in the web browser.
     
-      **Below, you'll find a screenshot of the Laravel homepage with the slave VM's IP address:**
-      ![slave_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/2841ff30-1ad7-4a43-926e-edc0215f1ac6)
+    **Below, you'll find a screenshot of the Laravel homepage with the slave VM's IP address:**
+    ![slave_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/2841ff30-1ad7-4a43-926e-edc0215f1ac6)
 
 
 
