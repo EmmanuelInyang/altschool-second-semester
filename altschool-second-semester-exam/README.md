@@ -105,7 +105,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          ```bash
             chmod +x slave.sh.j2
          ```
-17. **Write the contents for slave.sh.j2**
+17. **Write the contents for slave.sh.j2:**
     - This script automates the installation and setup of the LAMP stack on the slave virtual machine.
 
 18. **Create an Ansible playbook file (ansible-playbook.yml):**
