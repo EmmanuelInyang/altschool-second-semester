@@ -67,7 +67,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
          <li> You will be directed to the Laravel application's homepage. </li>
       </ul>
    
-   **Below is a screenshot of the homepage displayed in my browser:**
+   **Below, you'll find a screenshot of the Laravel homepage with the master VM's IP address.**
    ![master_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/e0999b82-451e-4bbd-b5a5-83d3a77fdea4)
 <br>  
 <br>
@@ -133,7 +133,7 @@ Here are the steps I followed to complete the AltSchool Second Semester exam in 
     - Using the second IP address obtained from the slave VM by logging into the slave VM and running the
       `hostname -I` command, I accessed the Laravel homepage by entering the slave's second IP address in the web browser.
    
-      **Below, you'll find a screenshot of the Laravel homepage with the slave VM's IP address:**
+      **Below, you'll find a screenshot of the Laravel homepage with the slave VM's IP address**
       ![slave_vm](https://github.com/EmmanuelInyang/altschool-second-semester/assets/95512710/2841ff30-1ad7-4a43-926e-edc0215f1ac6)
       
     - **Screenshot: The terminal displaying a successful Cron Job**
